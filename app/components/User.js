@@ -8,12 +8,24 @@ var User = React.createClass({
 
 		return(
 
-			<div>
+			<div className = "main-container">
+				<div className="row">
+						<div className="col-lg-12">
 
-				<h1>This is the user component</h1>
+							<div className="panel panel-primary">
+								<div className="panel-heading">
+									<h1 className="panel-title"><strong><i className="fa fa-newspaper-o" aria-hidden="true"></i>  User</strong></h1>
+								</div>
+								<div className="panel-body">
 
+									<h1>This is the user page</h1>
+
+								</div>
+							</div>
+
+						</div>
+					</div>		
 			</div>
-
 
 
 

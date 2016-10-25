@@ -27411,6 +27411,8 @@
 	var Main = __webpack_require__(237);
 	var Search = __webpack_require__(239);
 	var Saved = __webpack_require__(262);
+	var User = __webpack_require__(238);
+	var Admin = __webpack_require__(263);
 
 	// Export the Routes
 	module.exports = React.createElement(
@@ -27419,6 +27421,8 @@
 		React.createElement(Route, { path: 'Selector', component: Selector }),
 		React.createElement(Route, { path: 'Search', component: Search }),
 		React.createElement(Route, { path: 'Saved', component: Saved }),
+		React.createElement(Route, { path: 'User', component: User }),
+		React.createElement(Route, { path: 'Admin', component: Admin }),
 		React.createElement(IndexRoute, { component: Selector })
 	);
 
@@ -27453,10 +27457,11 @@
 			var clientChoice = event.target.value;
 			if (clientChoice == 'User') {
 				alert('User');
-				this.props.history.push("/Search");
+				this.props.history.push("/User");
 			}
 			if (clientChoice == 'Admin') {
 				alert('Admin');
+				this.props.history.push('/Admin');
 			}
 		},
 
@@ -27637,11 +27642,41 @@
 
 			return React.createElement(
 				'div',
-				null,
+				{ className: 'main-container' },
 				React.createElement(
-					'h1',
-					null,
-					'This is the user component'
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'div',
+						{ className: 'col-lg-12' },
+						React.createElement(
+							'div',
+							{ className: 'panel panel-primary' },
+							React.createElement(
+								'div',
+								{ className: 'panel-heading' },
+								React.createElement(
+									'h1',
+									{ className: 'panel-title' },
+									React.createElement(
+										'strong',
+										null,
+										React.createElement('i', { className: 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
+										'  User'
+									)
+								)
+							),
+							React.createElement(
+								'div',
+								{ className: 'panel-body' },
+								React.createElement(
+									'h1',
+									null,
+									'This is the user page'
+								)
+							)
+						)
+					)
 				)
 			);
 		}
@@ -29448,6 +29483,110 @@
 
 	// Export the module back to the route
 	module.exports = Main;
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Router = __webpack_require__(172);
+	var buttonStyle = {
+		width: 200,
+		height: 100,
+		position: 'relative',
+		top: 100
+	};
+	var adminBoxStyle = {
+
+		height: 500
+	};
+
+	var Admin = React.createClass({
+		displayName: 'Admin',
+
+		buttonClicked: function buttonClicked(event) {
+			console.log(event.target.value);
+			var clientChoice = event.target.value;
+			if (clientChoice == 'User') {
+				alert('User');
+				this.props.history.push("/User");
+			}
+			if (clientChoice == 'Admin') {
+				alert('Admin');
+				this.props.history.push('/Admin');
+			}
+		},
+
+		render: function render() {
+
+			return React.createElement(
+				'div',
+				{ className: 'main-container' },
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'div',
+						{ className: 'col-lg-12' },
+						React.createElement(
+							'div',
+							{ className: 'panel panel-primary', style: adminBoxStyle },
+							React.createElement(
+								'div',
+								{ className: 'panel-heading' },
+								React.createElement(
+									'h1',
+									{ className: 'panel-title' },
+									React.createElement(
+										'strong',
+										null,
+										React.createElement('i', { className: 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
+										'  Admin'
+									)
+								)
+							),
+							React.createElement(
+								'div',
+								{ className: 'panel-body' },
+								React.createElement(
+									'div',
+									{ className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6' },
+									React.createElement(
+										'div',
+										{ 'class': 'row' },
+										React.createElement(
+											'button',
+											{ value: 'viewSurvey', onClick: this.buttonClicked, type: 'button', className: 'btn btn-primary center-block', style: buttonStyle },
+											'View Survey'
+										)
+									)
+								),
+								React.createElement(
+									'div',
+									{ className: 'col-xs-6 col-sm-6 col-md-6 col-lg-6 ' },
+									React.createElement(
+										'div',
+										{ className: 'row' },
+										React.createElement(
+											'button',
+											{ value: 'makeSurvey', onClick: this.buttonClicked, type: 'button', className: 'btn btn-primary center-block', style: buttonStyle },
+											'Create Survey'
+										)
+									)
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+
+	});
+
+	// Export the module back to the route
+	module.exports = Admin;
 
 /***/ }
 /******/ ]);

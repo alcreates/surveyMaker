@@ -25,10 +25,11 @@ var Selector = React.createClass({
 		var clientChoice = event.target.value;
 		if(clientChoice == 'User'){
 			alert('User')
-			this.props.history.push("/Search");
+			this.props.history.push("/User");
 		}
 		if(clientChoice == 'Admin'){
 			alert('Admin')
+			this.props.history.push('/Admin');
 		}
 	},
 

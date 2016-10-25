@@ -14,6 +14,8 @@ var Selector = require('../components/Selector');
 var Main = require('../components/Main');
 var Search = require('../components/Search'); 
 var Saved = require('../components/Saved');
+var User = require('../components/User');
+var Admin = require('../components/Admin');
 
 // Export the Routes
 module.exports = (
@@ -25,6 +27,8 @@ module.exports = (
 		<Route path='Selector' component={Selector}/>
 		<Route path='Search' component={Search} />
 		<Route path='Saved' component={Saved} />
+		<Route path='User' component={User} />
+		<Route path='Admin' component={Admin} /> 
 		
 		{/*If user selects any other path... we get the Home Route*/}
 		<IndexRoute component={Selector} />
