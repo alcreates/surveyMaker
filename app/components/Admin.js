@@ -16,13 +16,13 @@ var Admin = React.createClass({
 	buttonClicked: function(event){
 		console.log(event.target.value);
 		var clientChoice = event.target.value;
-		if(clientChoice == 'User'){
-			alert('User')
+		if(clientChoice == 'viewSurvey'){
+			
 			this.props.history.push("/User");
 		}
-		if(clientChoice == 'Admin'){
-			alert('Admin')
-			this.props.history.push('/Admin');
+		if(clientChoice == 'makeSurvey'){
+			
+			this.props.history.push('/SurveyMaker');
 		}
 	},
 
