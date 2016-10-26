@@ -1,40 +1,34 @@
 var React = require('react');
 var Router = require('react-router')
-var question = [];
+var questions = [];
 
 var SurveyMaker = React.createClass({
 	getInitialState: function(){
 		return {
-			surveyName: "",
+			surveyName: this.props.name,
 			submitted: false,
 			question:"",
 		}
+
 	},
 	handleChange(event) {
-    		this.setState({surveyName : event.target.value});
+    		this.setState({question : event.target.value});
  	 },
- 	 handleSubmit(event) {
-   			 alert("Text field value is: '" + this.state.surveyName + "'");
-   			 this.setState({submitted: true})
+ 	handleAddQuestion(event) {
+   			 var singleQuestion = this.state.question
+  					console.log(singleQuestion);
+  					questions.push(singleQuestion);
+  					console.log(questions);
+  					this.setState({question:""})
   		},
-  	handleQuestionSubmit(event){
-  		
-  		var singleQuestion = this.state.question
-  		question.push(singleQuestion);
-  		console.log(question);
-  		this.setState({question:""})
-  	},
-  	handleQuestionChange(event){
-  			this.setState({question: event.target.value});
-  	},
+  
 
 
 	render: function(){
-		
-
-		if(this.state.submitted == false){
-		return(
-
+	
+	if(!questions){	
+		return(		
+			
 			<div className = "main-container">
 				<div className="row">
 						<div className="col-lg-12">
@@ -47,10 +41,10 @@ var SurveyMaker = React.createClass({
 
 									<h1>This is the surveyMaker page</h1>
 									 <input type="text"
-          								placeholder="Hello!"
-         								 value={this.state.surveyName}
+          								placeholder="Add question!"
+         								 value={this.state.question}
          								 onChange={this.handleChange} />
-       								 <button onClick={this.handleSubmit}>Submit</button>
+       								 <button onClick={this.handleAddQuestion}>Add</button>
 
 								</div>
 							</div>
@@ -59,14 +53,58 @@ var SurveyMaker = React.createClass({
 					</div>		
 			</div>
 
+		)
+	}else {
+
+		var questionList = questions.map(function(item, index){
+
+				return(
+
+						<div key={index}>
+
+						  <li className="list-group-item" >
+
+							<h3>
+							  	<span><em>{item}</em></span>
+								
+							</h3>
+							
 
 
-			)
-		}else{
-			return(
-				<div className = "main-container">
+						  </li>
 
-					<div className="row">
+						</div>
+				)
+
+			}.bind(this))
+
+
+	}
+	return(
+	<div className="main-container">	
+			<div className="main-container">
+				<div className="row">
+					<div className="col-lg-12">
+
+						<div className="panel panel-primary">
+							<div className="panel-heading">
+								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Saved Articles</strong></h1>
+							</div>
+							<div className="panel-body">
+								<ul className="list-group">
+								  {questionList}
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+
+		<div className = "main-container">
+				<div className="row">
 						<div className="col-lg-12">
 
 							<div className="panel panel-primary">
@@ -75,24 +113,22 @@ var SurveyMaker = React.createClass({
 								</div>
 								<div className="panel-body">
 
-									
+									<h1>This is the surveyMaker page</h1>
 									 <input type="text"
-          								placeholder="Add a question"
+          								placeholder="Add question!"
          								 value={this.state.question}
-         								 onChange={this.handleQuestionChange} />
-       								 <button onClick={this.handleQuestionSubmit}>Submit</button>
+         								 onChange={this.handleChange} />
+       								 <button onClick={this.handleAddQuestion}>Add</button>
 
 								</div>
 							</div>
 
 						</div>
 					</div>		
-					
-				</div>
+			</div>	
+	</div>
 
-
-				)
-		}
+		)	
 
 	}
 

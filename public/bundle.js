@@ -27413,8 +27413,8 @@
 	var Saved = __webpack_require__(262);
 	var User = __webpack_require__(238);
 	var Admin = __webpack_require__(263);
-	var SurveyMaker = __webpack_require__(264);
-
+	var SurveyMakerName = __webpack_require__(264);
+	var SurveyMaker = __webpack_require__(265);
 	// Export the Routes
 	module.exports = React.createElement(
 		Route,
@@ -27424,6 +27424,7 @@
 		React.createElement(Route, { path: 'Saved', component: Saved }),
 		React.createElement(Route, { path: 'User', component: User }),
 		React.createElement(Route, { path: 'Admin', component: Admin }),
+		React.createElement(Route, { path: 'SurveyMakerName', component: SurveyMakerName }),
 		React.createElement(Route, { path: 'SurveyMaker', component: SurveyMaker }),
 		React.createElement(IndexRoute, { component: Selector })
 	);
@@ -29517,7 +29518,7 @@
 			}
 			if (clientChoice == 'makeSurvey') {
 
-				this.props.history.push('/SurveyMaker');
+				this.props.history.push('/SurveyMakerName');
 			}
 		},
 
@@ -29598,10 +29599,11 @@
 
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(172);
-	var question = [];
 
-	var SurveyMaker = React.createClass({
-		displayName: 'SurveyMaker',
+	var SurveyMaker = __webpack_require__(265);
+
+	var SurveyMakerName = React.createClass({
+		displayName: 'SurveyMakerName',
 
 		getInitialState: function getInitialState() {
 			return {
@@ -29614,18 +29616,8 @@
 			this.setState({ surveyName: event.target.value });
 		},
 		handleSubmit: function handleSubmit(event) {
-			alert("Text field value is: '" + this.state.surveyName + "'");
-			this.setState({ submitted: true });
-		},
-		handleQuestionSubmit: function handleQuestionSubmit(event) {
 
-			var singleQuestion = this.state.question;
-			question.push(singleQuestion);
-			console.log(question);
-			this.setState({ question: "" });
-		},
-		handleQuestionChange: function handleQuestionChange(event) {
-			this.setState({ question: event.target.value });
+			this.setState({ submitted: true });
 		},
 
 
@@ -29664,7 +29656,7 @@
 									React.createElement(
 										'h1',
 										null,
-										'This is the surveyMaker page'
+										'This is the surveyMakerName page'
 									),
 									React.createElement('input', { type: 'text',
 										placeholder: 'Hello!',
@@ -29681,6 +29673,50 @@
 					)
 				);
 			} else {
+				return React.createElement(SurveyMaker, { name: this.state.surveyName });
+			}
+		}
+
+	});
+
+	// Export the module back to the route
+	module.exports = SurveyMakerName;
+
+/***/ },
+/* 265 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Router = __webpack_require__(172);
+	var questions = [];
+
+	var SurveyMaker = React.createClass({
+		displayName: 'SurveyMaker',
+
+		getInitialState: function getInitialState() {
+			return {
+				surveyName: this.props.name,
+				submitted: false,
+				question: ""
+			};
+		},
+		handleChange: function handleChange(event) {
+			this.setState({ question: event.target.value });
+		},
+		handleAddQuestion: function handleAddQuestion(event) {
+			var singleQuestion = this.state.question;
+			console.log(singleQuestion);
+			questions.push(singleQuestion);
+			console.log(questions);
+			this.setState({ question: "" });
+		},
+
+
+		render: function render() {
+
+			if (!questions) {
 				return React.createElement(
 					'div',
 					{ className: 'main-container' },
@@ -29710,21 +29746,143 @@
 								React.createElement(
 									'div',
 									{ className: 'panel-body' },
+									React.createElement(
+										'h1',
+										null,
+										'This is the surveyMaker page'
+									),
 									React.createElement('input', { type: 'text',
-										placeholder: 'Add a question',
+										placeholder: 'Add question!',
 										value: this.state.question,
-										onChange: this.handleQuestionChange }),
+										onChange: this.handleChange }),
 									React.createElement(
 										'button',
-										{ onClick: this.handleQuestionSubmit },
-										'Submit'
+										{ onClick: this.handleAddQuestion },
+										'Add'
 									)
 								)
 							)
 						)
 					)
 				);
+			} else {
+
+				var questionList = questions.map(function (item, index) {
+
+					return React.createElement(
+						'div',
+						{ key: index },
+						React.createElement(
+							'li',
+							{ className: 'list-group-item' },
+							React.createElement(
+								'h3',
+								null,
+								React.createElement(
+									'span',
+									null,
+									React.createElement(
+										'em',
+										null,
+										item
+									)
+								)
+							)
+						)
+					);
+				}.bind(this));
 			}
+			return React.createElement(
+				'div',
+				{ className: 'main-container' },
+				React.createElement(
+					'div',
+					{ className: 'main-container' },
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(
+							'div',
+							{ className: 'col-lg-12' },
+							React.createElement(
+								'div',
+								{ className: 'panel panel-primary' },
+								React.createElement(
+									'div',
+									{ className: 'panel-heading' },
+									React.createElement(
+										'h1',
+										{ className: 'panel-title' },
+										React.createElement(
+											'strong',
+											null,
+											React.createElement('i', { className: 'fa fa-download', 'aria-hidden': 'true' }),
+											' Saved Articles'
+										)
+									)
+								),
+								React.createElement(
+									'div',
+									{ className: 'panel-body' },
+									React.createElement(
+										'ul',
+										{ className: 'list-group' },
+										questionList
+									)
+								)
+							)
+						)
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'main-container' },
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(
+							'div',
+							{ className: 'col-lg-12' },
+							React.createElement(
+								'div',
+								{ className: 'panel panel-primary' },
+								React.createElement(
+									'div',
+									{ className: 'panel-heading' },
+									React.createElement(
+										'h1',
+										{ className: 'panel-title' },
+										React.createElement(
+											'strong',
+											null,
+											React.createElement('i', { className: 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
+											'  User'
+										)
+									)
+								),
+								React.createElement(
+									'div',
+									{ className: 'panel-body' },
+									React.createElement(
+										'h1',
+										null,
+										'This is the surveyMaker page'
+									),
+									React.createElement('input', { type: 'text',
+										placeholder: 'Add question!',
+										value: this.state.question,
+										onChange: this.handleChange }),
+									React.createElement(
+										'button',
+										{ onClick: this.handleAddQuestion },
+										'Add'
+									)
+								)
+							)
+						)
+					)
+				)
+			);
 		}
 
 	});

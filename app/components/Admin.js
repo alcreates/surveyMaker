@@ -22,7 +22,7 @@ var Admin = React.createClass({
 		}
 		if(clientChoice == 'makeSurvey'){
 			
-			this.props.history.push('/SurveyMaker');
+			this.props.history.push('/SurveyMakerName');
 		}
 	},
 

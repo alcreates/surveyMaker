@@ -16,8 +16,8 @@ var Search = require('../components/Search');
 var Saved = require('../components/Saved');
 var User = require('../components/User');
 var Admin = require('../components/Admin');
+var SurveyMakerName = require('../components/SurveyMakerName');
 var SurveyMaker = require('../components/SurveyMaker');
-
 // Export the Routes
 module.exports = (
 
@@ -30,6 +30,7 @@ module.exports = (
 		<Route path='Saved' component={Saved} />
 		<Route path='User' component={User} />
 		<Route path='Admin' component={Admin} /> 
+		<Route path='SurveyMakerName' component={SurveyMakerName} />
 		<Route path='SurveyMaker' component={SurveyMaker} />
 		
 		{/*If user selects any other path... we get the Home Route*/}
