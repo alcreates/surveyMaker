@@ -1,5 +1,7 @@
 var React = require('react');
-var Router = require('react-router')
+var Router = require('react-router');
+var User = require('./User');
+var SurveyMakerName = require('./SurveyMakerName');
 
 var image = "https://static.pexels.com/photos/29724/pexels-photo-29724.jpg"
 
@@ -20,20 +22,41 @@ var buttonStyle = {
 
 
 var Selector = React.createClass({
+	getInitialState: function(){
+		return {
+			clientChoice: "",
+			submitted: false,
+			question:"",
+		}
+	},
+
 	buttonClicked: function(event){
 		console.log(event.target.value);
 		var clientChoice = event.target.value;
 		if(clientChoice == 'User'){
-			alert('User')
-			this.props.history.push("/User");
+			this.props.history.push('/User');
 		}
 		if(clientChoice == 'Admin'){
-			alert('Admin')
 			this.props.history.push('/Admin');
+			//this.setState({clientChoice:'Admin'})
 		}
+	},
+	componentWillUnmount:function(){
+			this.setState({clientChoice:""});
 	},
 
 	render: function(){
+			if(this.state.clientChoice == 'User'){
+				
+				return(
+					<User/>
+					)
+			}else if (this.state.clientChoice == 'Admin'){
+				
+				return(
+					<SurveyMakerName/>
+					)
+			}
 
 			return(
 

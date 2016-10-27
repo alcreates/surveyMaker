@@ -1,6 +1,8 @@
 // Include the Main React Dependencies
 var React = require('react');
 var ReactDOM = require('react-dom');
+import { browserHistory } from 'react-router'
+import {hashHistory} from 'react-router'
 
 // Grab the proeprty associated with the Router
 var Router = require('react-router').Router
@@ -13,7 +15,7 @@ var routes = require('./config/routes');
 // Note how ReactDOM takes in two parameters (the contents and the location)
 ReactDOM.render(
 
-	<Router>{routes}</Router>,
+	<Router history={hashHistory} routes={routes}/>,
 	document.getElementById('app')
 )
 

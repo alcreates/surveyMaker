@@ -8,7 +8,7 @@ var SurveyMakerName = React.createClass({
 		return {
 			surveyName: "",
 			submitted: false,
-			question:"",
+			
 		}
 	},
 	handleChange(event) {
@@ -18,7 +18,12 @@ var SurveyMakerName = React.createClass({
    			
    			 this.setState({submitted: true})
   		},
-  
+  	componentWillMount() {
+  		this.setState({submitted:false, surveyName: ""});
+  		
+  		console.log("will mount;")
+  	},
+
 
 
 	render: function(){
@@ -55,9 +60,10 @@ var SurveyMakerName = React.createClass({
 
 			)
 		}else{
+
 			return(
 				
-				<SurveyMaker name={this.state.surveyName} />
+				<SurveyMaker  name={this.state.surveyName} />
 				)
 		}
 

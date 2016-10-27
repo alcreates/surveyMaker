@@ -5,6 +5,8 @@ var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
 
+
+
 //  Include the IndexRoute (catch-all route)
 var IndexRoute	= Router.IndexRoute;
 
@@ -18,6 +20,7 @@ var User = require('../components/User');
 var Admin = require('../components/Admin');
 var SurveyMakerName = require('../components/SurveyMakerName');
 var SurveyMaker = require('../components/SurveyMaker');
+var SurveyMakerFinnish = require('../components/SurveyMakerFinnish');
 // Export the Routes
 module.exports = (
 
@@ -26,12 +29,13 @@ module.exports = (
 
 		{/* If user selects Search or Saved show the appropriate component*/}
 		<Route path='Selector' component={Selector}/>
-		<Route path='Search' component={Search} />
-		<Route path='Saved' component={Saved} />
-		<Route path='User' component={User} />
-		<Route path='Admin' component={Admin} /> 
+		
+			<Route path='User' component={User} />
+			<Route path='Admin' component={Admin} /> 
+
 		<Route path='SurveyMakerName' component={SurveyMakerName} />
 		<Route path='SurveyMaker' component={SurveyMaker} />
+		<Route path='SurveyMakerFinnish' component={SurveyMakerFinnish}/>
 		
 		{/*If user selects any other path... we get the Home Route*/}
 		<IndexRoute component={Selector} />

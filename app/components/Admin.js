@@ -21,7 +21,7 @@ var Admin = React.createClass({
 			this.props.history.push("/User");
 		}
 		if(clientChoice == 'makeSurvey'){
-			
+			console.log(this.props.history);
 			this.props.history.push('/SurveyMakerName');
 		}
 	},

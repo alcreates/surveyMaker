@@ -2,6 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var questions = [];
 var helpers = require('../utils/helpers.js');
+var SurveyMakerFinnish = require('./SurveyMakerFinnish');
 
 var SurveyMaker = React.createClass({
 	getInitialState: function(){
@@ -27,16 +28,32 @@ var SurveyMaker = React.createClass({
 
   			helpers.postSaved(title, questions)
 			.then(function(data){
-				console.log("success");
-				questions = [];
+				console.log(this.state.submitted);
+				
+				this.setState({submitted:true});
+
 			}.bind(this))
 
 
   	},
+  	componentWillUnmount:function(){
+
+  		this.setState({submitted:false});
+  		this.setState({question:""})
+  		questions =[];
+
+  	},
+
   
 
 
 	render: function(){
+	 if(this.state.submitted){
+	 	console.log("survey maker props " + this.props);
+	 	return(<SurveyMakerFinnish/>);
+
+	 }	
+	
 	
 	if(!questions){	
 		return(		
