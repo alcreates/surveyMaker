@@ -1,6 +1,7 @@
 var React = require('react');
-var Router = require('react-router')
+var Router = require('react-router');
 var questions = [];
+var helpers = require('../utils/helpers.js');
 
 var SurveyMaker = React.createClass({
 	getInitialState: function(){
@@ -21,6 +22,17 @@ var SurveyMaker = React.createClass({
   					console.log(questions);
   					this.setState({question:""})
   		},
+  	handleSubmit(event){
+  			var title = this.state.surveyName;
+
+  			helpers.postSaved(title, questions)
+			.then(function(data){
+				console.log("success");
+				questions = [];
+			}.bind(this))
+
+
+  	},
   
 
 
@@ -82,27 +94,6 @@ var SurveyMaker = React.createClass({
 	}
 	return(
 	<div className="main-container">	
-			<div className="main-container">
-				<div className="row">
-					<div className="col-lg-12">
-
-						<div className="panel panel-primary">
-							<div className="panel-heading">
-								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Saved Articles</strong></h1>
-							</div>
-							<div className="panel-body">
-								<ul className="list-group">
-								  {questionList}
-								</ul>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-
-			</div>
-
 		<div className = "main-container">
 				<div className="row">
 						<div className="col-lg-12">
@@ -125,7 +116,36 @@ var SurveyMaker = React.createClass({
 
 						</div>
 					</div>		
-			</div>	
+			</div>		
+
+
+			<div className="main-container">
+				<div className="row">
+					<div className="col-lg-12">
+
+						<div className="panel panel-primary">
+							<div className="panel-heading">
+								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Saved Articles</strong></h1>
+							</div>
+							<div className="panel-body">
+								<ul className="list-group">
+								  {questionList}
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+							<div className="row">
+								<button value='Admin' onClick={this.handleSubmit} type="button" className="btn btn-primary pull-right" >Submit</button>
+							</div>
+				</div>	
+
+
+			</div>
+
+		
 	</div>
 
 		)	

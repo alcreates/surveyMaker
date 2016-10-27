@@ -28124,10 +28124,10 @@
 			});
 		},
 
-		postSaved: function postSaved(title, date, url) {
+		postSaved: function postSaved(title, questions) {
 
-			var newArticle = { title: title, date: date, url: url };
-			return axios.post('/api/saved', newArticle).then(function (results) {
+			var newSurvey = { title: title, questions: questions };
+			return axios.post('/api/saved', newSurvey).then(function (results) {
 				console.log("axios results", results._id);
 				return results._id;
 			});
@@ -29691,6 +29691,7 @@
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(172);
 	var questions = [];
+	var helpers = __webpack_require__(242);
 
 	var SurveyMaker = React.createClass({
 		displayName: 'SurveyMaker',
@@ -29711,6 +29712,14 @@
 			questions.push(singleQuestion);
 			console.log(questions);
 			this.setState({ question: "" });
+		},
+		handleSubmit: function handleSubmit(event) {
+			var title = this.state.surveyName;
+
+			helpers.postSaved(title, questions).then(function (data) {
+				console.log("success");
+				questions = [];
+			}.bind(this));
 		},
 
 
@@ -29816,8 +29825,8 @@
 										React.createElement(
 											'strong',
 											null,
-											React.createElement('i', { className: 'fa fa-download', 'aria-hidden': 'true' }),
-											' Saved Articles'
+											React.createElement('i', { className: 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
+											'  User'
 										)
 									)
 								),
@@ -29825,9 +29834,18 @@
 									'div',
 									{ className: 'panel-body' },
 									React.createElement(
-										'ul',
-										{ className: 'list-group' },
-										questionList
+										'h1',
+										null,
+										'This is the surveyMaker page'
+									),
+									React.createElement('input', { type: 'text',
+										placeholder: 'Add question!',
+										value: this.state.question,
+										onChange: this.handleChange }),
+									React.createElement(
+										'button',
+										{ onClick: this.handleAddQuestion },
+										'Add'
 									)
 								)
 							)
@@ -29855,8 +29873,8 @@
 										React.createElement(
 											'strong',
 											null,
-											React.createElement('i', { className: 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
-											'  User'
+											React.createElement('i', { className: 'fa fa-download', 'aria-hidden': 'true' }),
+											' Saved Articles'
 										)
 									)
 								),
@@ -29864,20 +29882,24 @@
 									'div',
 									{ className: 'panel-body' },
 									React.createElement(
-										'h1',
-										null,
-										'This is the surveyMaker page'
-									),
-									React.createElement('input', { type: 'text',
-										placeholder: 'Add question!',
-										value: this.state.question,
-										onChange: this.handleChange }),
-									React.createElement(
-										'button',
-										{ onClick: this.handleAddQuestion },
-										'Add'
+										'ul',
+										{ className: 'list-group' },
+										questionList
 									)
 								)
+							)
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12 ' },
+						React.createElement(
+							'div',
+							{ className: 'row' },
+							React.createElement(
+								'button',
+								{ value: 'Admin', onClick: this.handleSubmit, type: 'button', className: 'btn btn-primary pull-right' },
+								'Submit'
 							)
 						)
 					)

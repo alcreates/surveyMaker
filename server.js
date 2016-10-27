@@ -5,7 +5,8 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 
 //Require Schemas
-var Article = require('./server/model.js');
+//var Article = require('./server/model.js');
+var Survey = require('./server/surveyModel.js')
 
 // Create Instance of Express
 var app = express();
@@ -23,7 +24,7 @@ app.use(express.static('./public'));
 // -------------------------------------------------
 
 // MongoDB Configuration configuration
-mongoose.connect('mongodb://admin:reactrocks@ds023593.mlab.com:23593/heroku_pg676kmk');
+mongoose.connect('mongodb://alvaro:everplans@ds031845.mlab.com:31845/everplans');
 var db = mongoose.connection;
 
 db.on('error', function (err) {
@@ -60,15 +61,15 @@ app.get('/api/saved', function(req, res) {
 
 // Route to add an article to saved list
 app.post('/api/saved', function(req, res){
-	var newArticle = new Article(req.body);
+	var newSurvey = new Survey(req.body);
 
 	console.log(req.body)
 
-	var title = req.body.title;
-	var date = req.body.date;
-	var url = req.body.url;
+	//var title = req.body.title;
+	//var date = req.body.date;
+	
 
-	newArticle.save(function(err, doc){
+	newSurvey.save(function(err, doc){
 		if(err){
 			console.log(err);
 		} else {

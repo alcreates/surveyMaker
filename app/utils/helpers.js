@@ -47,10 +47,10 @@ var helpers = {
 			})
 	},
 
-	postSaved: function(title, date, url){
+	postSaved: function(title, questions){
 
-		var newArticle = {title: title, date: date, url: url};
-		return axios.post('/api/saved', newArticle)
+		var newSurvey = {title: title, questions: questions};
+		return axios.post('/api/saved', newSurvey)
 			.then(function(results){
 				console.log("axios results", results._id);
 				return results._id;
