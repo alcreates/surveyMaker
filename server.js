@@ -47,8 +47,10 @@ app.get('/', function(req, res){
 // Route to get all saved articles
 app.get('/api/saved', function(req, res) {
 
-	Article.find({})
+	Survey.find({})
 		.exec(function(err, doc){
+
+			console.log(doc);
 
 			if(err){
 				console.log(err);
