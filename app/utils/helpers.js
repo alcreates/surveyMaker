@@ -57,6 +57,16 @@ var helpers = {
 			})
 
 	},
+	userSurveySaved: function(username, surveyType, answers){
+
+		var newUserSurvey = {userName: title, surveyType: surveyType, answers: answers};
+		return axios.post('/userSurveySaved', newUserSurvey)
+			.then(function(results){
+				console.log("axios results", results._id);
+				return results._id;
+			})
+
+	},
 
 	deleteSaved: function(title, data, url){
 

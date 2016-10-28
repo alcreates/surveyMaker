@@ -1,25 +1,26 @@
 var React = require('react');
 var Router = require('react-router');
+var User = require('./User');
 
-var SurveyMaker = require('./SurveyMaker');
 
-var SurveyMakerName = React.createClass({
+// Create the Main component
+var UserName = React.createClass({
 	getInitialState: function(){
 		return {
-			surveyName: "",
+			userName: "",
 			submitted: false,
 			
 		}
 	},
 	handleChange(event) {
-    		this.setState({surveyName : event.target.value});
+    		this.setState({userName : event.target.value});
  	 },
  	 handleSubmit(event) {
    			
    			 this.setState({submitted: true})
   		},
   	componentWillMount() {
-  		this.setState({submitted:false, surveyName: ""});
+  		this.setState({submitted:false, userName: ""});
   		
   		console.log("will mount;")
   	},
@@ -42,10 +43,10 @@ var SurveyMakerName = React.createClass({
 								</div>
 								<div className="panel-body">
 
-									<h1>This is the surveyMakerName page</h1>
+									<h1>This is the userName page</h1>
 									 <input type="text"
           								placeholder="Hello!"
-         								 value={this.state.surveyName}
+         								 value={this.state.userName}
          								 onChange={this.handleChange} />
        								 <button onClick={this.handleSubmit}>Submit</button>
 
@@ -63,7 +64,7 @@ var SurveyMakerName = React.createClass({
 
 			return(
 				
-				<SurveyMaker  name={this.state.surveyName} />
+				<User  name={this.state.userName} />
 				)
 		}
 
@@ -72,6 +73,5 @@ var SurveyMakerName = React.createClass({
 
 })
 
-
 // Export the module back to the route
-module.exports = SurveyMakerName;
+module.exports = UserName;

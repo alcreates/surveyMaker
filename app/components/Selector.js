@@ -34,7 +34,7 @@ var Selector = React.createClass({
 		console.log(event.target.value);
 		var clientChoice = event.target.value;
 		if(clientChoice == 'User'){
-			this.props.history.push('/User');
+			this.props.history.push('/UserName');
 		}
 		if(clientChoice == 'Admin'){
 			this.props.history.push('/Admin');
@@ -46,17 +46,17 @@ var Selector = React.createClass({
 	},
 
 	render: function(){
-			if(this.state.clientChoice == 'User'){
+			// if(this.state.clientChoice == 'User'){
 				
-				return(
-					<User/>
-					)
-			}else if (this.state.clientChoice == 'Admin'){
+			// 	return(
+			// 		<User/>
+			// 		)
+			// }else if (this.state.clientChoice == 'Admin'){
 				
-				return(
-					<SurveyMakerName/>
-					)
-			}
+			// 	return(
+			// 		<SurveyMakerName/>
+			// 		)
+			// }
 
 			return(
 

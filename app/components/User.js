@@ -1,11 +1,14 @@
 var React = require('react');
 var Router = require('react-router');
 var helpers = require('../utils/helpers.js');
+var UserSurvey = require('./UserSurvey');
 
 var User = React.createClass({
 	getInitialState: function(){
 		return {
-			savedSurveys: ""
+			userName: this.props.name,
+			savedSurveys: "",
+			clientChoice: ""
 		}
 	},
 
@@ -18,6 +21,13 @@ var User = React.createClass({
 				});
 				console.log("saved results " + Data.data);
 			}.bind(this))
+	},
+	handleButton:function(event){
+		
+		console.log(event.target.value)
+		this.setState({clientChoice: event.target.value});
+		
+
 	},
 
 	// /*This code handles the sending of the search terms to the parent Search component*/
@@ -37,6 +47,16 @@ var User = React.createClass({
 
 			)
 		}
+		else if(this.state.clientChoice){
+			var questionaires = this.state.savedSurveys
+			var choice = this.state.clientChoice
+
+			return(
+				<UserSurvey surveyPick={questionaires[choice]} name={this.state.userName}/>
+
+				)
+
+		}
 
 		else {
 
@@ -51,7 +71,7 @@ var User = React.createClass({
 							<h3>
 							  	<span><em>{survey.title}</em></span>
 								<span className="btn-group pull-right" >
-									<button className="btn btn-default ">Complete Survey</button>
+									<button value={index} onClick={this.handleButton} className="btn btn-default ">Complete Survey</button>
 									
 								</span>
 							</h3>

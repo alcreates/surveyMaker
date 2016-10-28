@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 //Require Schemas
 //var Article = require('./server/model.js');
 var Survey = require('./server/surveyModel.js')
+var UserSurvey = require('./server/UserSurvey.js')
 
 // Create Instance of Express
 var app = express();
@@ -75,6 +76,20 @@ app.post('/api/saved', function(req, res){
 		if(err){
 			console.log(err);
 		} else {
+			res.send(doc._id);
+		}
+	});
+});
+
+app.post('/userSurvey', function(req, res){
+	var newUserSurvey = new UserSurvey(req.body);
+
+	console.log(req.body);
+
+	newUserSurvey.save(function(err, doc){
+		if(err){
+			console.log(err);
+		}else{
 			res.send(doc._id);
 		}
 	});

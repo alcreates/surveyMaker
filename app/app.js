@@ -3,7 +3,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 import { browserHistory } from 'react-router'
 import {hashHistory} from 'react-router'
-
+var Link = require('react-router').Link
 // Grab the proeprty associated with the Router
 var Router = require('react-router').Router
 

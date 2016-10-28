@@ -21,6 +21,8 @@ var Admin = require('../components/Admin');
 var SurveyMakerName = require('../components/SurveyMakerName');
 var SurveyMaker = require('../components/SurveyMaker');
 var SurveyMakerFinnish = require('../components/SurveyMakerFinnish');
+var UserSurvey = require('../components/UserSurvey');
+var UserName = require('../components/UserName');
 // Export the Routes
 module.exports = (
 
@@ -32,10 +34,12 @@ module.exports = (
 		
 			<Route path='User' component={User} />
 			<Route path='Admin' component={Admin} /> 
+			<Route path='UserName' component={UserName}/>
 
 		<Route path='SurveyMakerName' component={SurveyMakerName} />
 		<Route path='SurveyMaker' component={SurveyMaker} />
 		<Route path='SurveyMakerFinnish' component={SurveyMakerFinnish}/>
+		<Route path='UserSurvey' component={UserSurvey}/>
 		
 		{/*If user selects any other path... we get the Home Route*/}
 		<IndexRoute component={Selector} />
