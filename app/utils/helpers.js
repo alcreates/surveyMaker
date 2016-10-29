@@ -54,6 +54,14 @@ var helpers = {
 				return results;
 			})
 	},
+	getUsersNames: function(){
+
+		return axios.get('/usersNames')
+			.then(function(results){
+				console.log("axios results", results);
+				return results;
+			})
+	},
 
 	postSaved: function(title, questions){
 

@@ -27407,18 +27407,18 @@
 	// Reference the high-level components
 	var Selector = __webpack_require__(236);
 
-	var Main = __webpack_require__(269);
-	var Search = __webpack_require__(270);
-	var Saved = __webpack_require__(273);
+	var Main = __webpack_require__(262);
+	var Search = __webpack_require__(263);
+	var Saved = __webpack_require__(266);
 	var User = __webpack_require__(237);
-	var Admin = __webpack_require__(274);
+	var Admin = __webpack_require__(267);
 	var SurveyMakerName = __webpack_require__(259);
 	var SurveyMaker = __webpack_require__(260);
 	var SurveyMakerFinnish = __webpack_require__(261);
 	var UserSurvey = __webpack_require__(258);
-	var UserName = __webpack_require__(275);
-	var AdminSelector = __webpack_require__(276);
-	var AdminUserList = __webpack_require__(277);
+	var UserName = __webpack_require__(268);
+	var AdminSelector = __webpack_require__(269);
+	var AdminUserList = __webpack_require__(270);
 	// Export the Routes
 	module.exports = React.createElement(
 		Route,
@@ -27760,6 +27760,13 @@
 		getSavedUsers: function getSavedUsers() {
 
 			return axios.get('/usersSaved').then(function (results) {
+				console.log("axios results", results);
+				return results;
+			});
+		},
+		getUsersNames: function getUsersNames() {
+
+			return axios.get('/usersNames').then(function (results) {
 				console.log("axios results", results);
 				return results;
 			});
@@ -29530,14 +29537,7 @@
 	module.exports = SurveyMakerFinnish;
 
 /***/ },
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29640,7 +29640,7 @@
 	module.exports = Main;
 
 /***/ },
-/* 270 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29650,8 +29650,8 @@
 	var Router = __webpack_require__(1);
 
 	// Include the Query and Results componens
-	var Query = __webpack_require__(271);
-	var Results = __webpack_require__(272);
+	var Query = __webpack_require__(264);
+	var Results = __webpack_require__(265);
 
 	// Include the Helper (for the query)
 	var helpers = __webpack_require__(238);
@@ -29727,7 +29727,7 @@
 	module.exports = Search;
 
 /***/ },
-/* 271 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29864,7 +29864,7 @@
 	module.exports = Query;
 
 /***/ },
-/* 272 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30027,7 +30027,7 @@
 	module.exports = Results;
 
 /***/ },
-/* 273 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30196,7 +30196,7 @@
 	module.exports = Main;
 
 /***/ },
-/* 274 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30300,7 +30300,7 @@
 	module.exports = Admin;
 
 /***/ },
-/* 275 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30398,7 +30398,7 @@
 	module.exports = UserName;
 
 /***/ },
-/* 276 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30502,7 +30502,7 @@
 	module.exports = AdminSelector;
 
 /***/ },
-/* 277 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30529,7 +30529,7 @@
 		// And set its results to savedSurveys state making them available to the component. 
 		componentDidMount: function componentDidMount() {
 
-			helpers.getSavedUsers().then(function (Data) {
+			helpers.getUsersNames().then(function (Data) {
 				this.setState({
 					savedSurveys: Data.data
 				});
@@ -30562,7 +30562,7 @@
 							React.createElement(
 								'em',
 								null,
-								'No Users available ...'
+								'No  available ...'
 							)
 						)
 					)
@@ -30594,7 +30594,7 @@
 										React.createElement(
 											'em',
 											null,
-											survey.userName
+											survey
 										)
 									),
 									React.createElement(

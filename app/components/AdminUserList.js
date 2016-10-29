@@ -18,7 +18,7 @@ var AdminUserList = React.createClass({
 // And set its results to savedSurveys state making them available to the component. 
 	componentDidMount(){
 
-		helpers.getSavedUsers()
+		helpers.getUsersNames()
 			.then(function(Data){
 				this.setState({
 					savedSurveys: Data.data
@@ -46,7 +46,7 @@ var AdminUserList = React.createClass({
 				<li className="list-group-item">
 
 					<h3>
-					  	<span><em>No Users available ...</em></span>
+					  	<span><em>No  available ...</em></span>
 					</h3>
 
 			  	</li>
@@ -69,7 +69,7 @@ var AdminUserList = React.createClass({
 			// This function will iterate through savedSurveys and conduct the following to each
 			// and will be added to unorder list in the following return statement.
 			var surveys = this.state.savedSurveys.map(function(survey, index){
-
+				
 				return(
 
 						<div key={index}>
@@ -77,7 +77,7 @@ var AdminUserList = React.createClass({
 						  <li className="list-group-item" >
 
 							<h3>
-							  	<span><em>{survey.userName}</em></span>
+							  	<span><em>{survey}</em></span>
 								<span className="btn-group pull-right" >
 									<button value={index} onClick={this.handleButton} className="btn btn-default ">View Survey</button>
 									

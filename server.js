@@ -78,6 +78,24 @@ app.get('/usersSaved', function(req, res) {
 		})
 });
 
+app.get('/usersNames', function(req, res) {
+    
+
+	UserSurvey.find({}).distinct('userName')
+		.exec(function(err, doc){
+
+			console.log(doc);
+
+			if(err){
+				console.log(err);
+			}
+			else {
+				res.send(doc);
+			}
+		})
+});
+
+
 
 // Route to add an survey to saved list
 app.post('/api/saved', function(req, res){
