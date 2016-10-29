@@ -95,6 +95,23 @@ app.get('/usersNames', function(req, res) {
 		})
 });
 
+app.get('/selectedUserSurveys', function(req, res) {
+     console.log("selected user Survey req " + req.param('userName'));
+
+		UserSurvey.find({'userName':req.param('userName') })
+		.exec(function(err, doc){
+
+			console.log(doc);
+
+			if(err){
+				console.log(err);
+			}
+			else {
+				res.send(doc);
+			}
+		})
+});
+
 
 
 // Route to add an survey to saved list

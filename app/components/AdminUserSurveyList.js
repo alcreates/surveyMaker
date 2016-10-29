@@ -2,15 +2,14 @@ var React = require('react');
 var Router = require('react-router');
 var helpers = require('../utils/helpers.js');
 var UserSurvey = require('./UserSurvey');
-var AdminUserSurveyList = require('./AdminUserSurveyList');
 
 //Second component is User workflow
 //Component takes the user name from the props and sets it to the state
 
-var AdminUserList = React.createClass({
+var AdminUserSurveyList = React.createClass({
 	getInitialState: function(){
 		return {
-			
+			userName: this.props.userPick,
 			savedSurveys: "",
 			clientChoice: ""
 		}
@@ -18,13 +17,13 @@ var AdminUserList = React.createClass({
 //Once the component mounts, it will make a call to our data base to get available surveys
 // And set its results to savedSurveys state making them available to the component. 
 	componentDidMount(){
-
-		helpers.getUsersNames()
+        console.log("did mount user name = " + this.state.userName);
+		helpers.getSelectedUserSurveys(this.state.userName)
 			.then(function(Data){
 				this.setState({
 					savedSurveys: Data.data
 				});
-				console.log("saved results " + Data.data);
+				console.log("user survey results " + Data.data);
 			}.bind(this))
 	},
 // A button is attached to each survey in order to let the user be able to pick a survey
@@ -58,7 +57,6 @@ var AdminUserList = React.createClass({
 		else if(this.state.clientChoice){
 			var names = this.state.savedSurveys
 			var choice = this.state.clientChoice
-			console.log('name picked =' + names[choice]);
 			// surveyPick - questionaires are an array of objects - choice is the index of the objects.
 			// name - was obtained from the userName component. 
 			return(
@@ -80,7 +78,7 @@ var AdminUserList = React.createClass({
 						  <li className="list-group-item" >
 
 							<h3>
-							  	<span><em>{survey}</em></span>
+							  	<span><em>{survey.userName}</em></span>
 								<span className="btn-group pull-right" >
 									<button value={index} onClick={this.handleButton} className="btn btn-default ">View Survey</button>
 									
@@ -129,4 +127,4 @@ var AdminUserList = React.createClass({
 
 
 // Export the module back to the route
-module.exports = AdminUserList;
+module.exports = AdminUserSurveyList;

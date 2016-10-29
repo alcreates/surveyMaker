@@ -25,6 +25,7 @@ var UserSurvey = require('../components/UserSurvey');
 var UserName = require('../components/UserName');
 var AdminSelector = require('../components/AdminSelector');
 var AdminUserList = require('../components/AdminUserList');
+var AdminUserSurveyList = require('../components/AdminUserSurveyList');
 // Export the Routes
 module.exports = (
 
@@ -39,6 +40,7 @@ module.exports = (
 			<Route path='UserName' component={UserName}/>
 			<Route path='AdminSelector' component={AdminSelector}/>
 			<Route path='AdminUserList' component={AdminUserList}/>
+			<Route path='AdminUserSurveyList' component={AdminUserSurveyList}/>
 		<Route path='SurveyMakerName' component={SurveyMakerName} />
 		<Route path='SurveyMaker' component={SurveyMaker} />
 		<Route path='SurveyMakerFinnish' component={SurveyMakerFinnish}/>

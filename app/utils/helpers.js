@@ -37,6 +37,16 @@ var helpers = {
 
 
 	},
+	getSelectedUserSurveys: function(name){
+			console.log("this is survey user name axios : " + name)
+		return axios.get('/selectedUserSurveys',{params:{'userName': name}})
+			.then(function(results){
+				console.log("axios results", results);
+				return results;
+			})
+	},
+
+	
 
 	getSaved: function(){
 
