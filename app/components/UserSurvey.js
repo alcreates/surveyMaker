@@ -10,8 +10,7 @@ var helpers = require('../utils/helpers');
 // Create the Main component
 var UserSurvey = React.createClass({
 
-	/*Here we set the initial state variables (this allows us to propagate the variables for maniuplation by the children components*/
-	/*Also note the "resuls" state. This will be where we hold the data from our results*/
+	// Added information that was passed via component props. 
 	getInitialState: function(){
 		return { 
 			userName: this.props.name,
@@ -21,9 +20,11 @@ var UserSurvey = React.createClass({
 
 		}
 	},
+	// Adds completed form information to our data base. 
 	handleSubmit: function(){
 		console.log(answers);
 		console.log(this.state.userName);
+		console.log(this.state.questionTitle);
 		helpers.userSurveySaved(this.state.userName, this.state.questionTitle, answers)
 			.then(function(data){
 				console.log("userSurvey worked");
@@ -34,6 +35,7 @@ var UserSurvey = React.createClass({
 
 	
 	// Whenever we detect ANY change in the textbox, we register it. 
+	//And add to info to our global variable called answers that contains an empty object.
     handleChange: function(event) {
     	console.log("TEXT CHANGED");
 

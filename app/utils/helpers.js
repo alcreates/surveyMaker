@@ -46,6 +46,14 @@ var helpers = {
 				return results;
 			})
 	},
+	getSavedUsers: function(){
+
+		return axios.get('/usersSaved')
+			.then(function(results){
+				console.log("axios results", results);
+				return results;
+			})
+	},
 
 	postSaved: function(title, questions){
 
@@ -59,7 +67,7 @@ var helpers = {
 	},
 	userSurveySaved: function(username, surveyType, answers){
 
-		var newUserSurvey = {userName: title, surveyType: surveyType, answers: answers};
+		var newUserSurvey = {userName: username, surveyType: surveyType, answers: answers};
 		return axios.post('/userSurveySaved', newUserSurvey)
 			.then(function(results){
 				console.log("axios results", results._id);

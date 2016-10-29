@@ -45,7 +45,7 @@ app.get('/', function(req, res){
 	res.sendFile('./public/index.html');
 })
 
-// Route to get all saved articles
+// Route to get all saved surveys
 app.get('/api/saved', function(req, res) {
 
 	Survey.find({})
@@ -62,7 +62,24 @@ app.get('/api/saved', function(req, res) {
 		})
 });
 
-// Route to add an article to saved list
+app.get('/usersSaved', function(req, res) {
+
+	UserSurvey.find({})
+		.exec(function(err, doc){
+
+			console.log(doc);
+
+			if(err){
+				console.log(err);
+			}
+			else {
+				res.send(doc);
+			}
+		})
+});
+
+
+// Route to add an survey to saved list
 app.post('/api/saved', function(req, res){
 	var newSurvey = new Survey(req.body);
 
@@ -81,7 +98,7 @@ app.post('/api/saved', function(req, res){
 	});
 });
 
-app.post('/userSurvey', function(req, res){
+app.post('/userSurveySaved', function(req, res){
 	var newUserSurvey = new UserSurvey(req.body);
 
 	console.log(req.body);

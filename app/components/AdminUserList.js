@@ -6,10 +6,10 @@ var UserSurvey = require('./UserSurvey');
 //Second component is User workflow
 //Component takes the user name from the props and sets it to the state
 
-var User = React.createClass({
+var AdminUserList = React.createClass({
 	getInitialState: function(){
 		return {
-			userName: this.props.name,
+			
 			savedSurveys: "",
 			clientChoice: ""
 		}
@@ -18,7 +18,7 @@ var User = React.createClass({
 // And set its results to savedSurveys state making them available to the component. 
 	componentDidMount(){
 
-		helpers.getSaved()
+		helpers.getSavedUsers()
 			.then(function(Data){
 				this.setState({
 					savedSurveys: Data.data
@@ -46,7 +46,7 @@ var User = React.createClass({
 				<li className="list-group-item">
 
 					<h3>
-					  	<span><em>No Surveys available ...</em></span>
+					  	<span><em>No Users available ...</em></span>
 					</h3>
 
 			  	</li>
@@ -77,9 +77,9 @@ var User = React.createClass({
 						  <li className="list-group-item" >
 
 							<h3>
-							  	<span><em>{survey.title}</em></span>
+							  	<span><em>{survey.userName}</em></span>
 								<span className="btn-group pull-right" >
-									<button value={index} onClick={this.handleButton} className="btn btn-default ">Complete Survey</button>
+									<button value={index} onClick={this.handleButton} className="btn btn-default ">View Survey</button>
 									
 								</span>
 							</h3>
@@ -94,7 +94,7 @@ var User = React.createClass({
 
 		}
 
-
+		// Returns the list of surveys.
 		return(
 			<div className="main-container">
 				<div className="row">
@@ -102,7 +102,7 @@ var User = React.createClass({
 
 						<div className="panel panel-primary">
 							<div className="panel-heading">
-								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Saved Articles</strong></h1>
+								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Users</strong></h1>
 							</div>
 							<div className="panel-body">
 								<ul className="list-group">
@@ -126,4 +126,4 @@ var User = React.createClass({
 
 
 // Export the module back to the route
-module.exports = User;
+module.exports = AdminUserList;

@@ -2,6 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var User = require('./User');
 var SurveyMakerName = require('./SurveyMakerName');
+var currentTime = new Date();
 
 var image = "https://static.pexels.com/photos/29724/pexels-photo-29724.jpg"
 
@@ -34,6 +35,7 @@ var Selector = React.createClass({
 		console.log(event.target.value);
 		var clientChoice = event.target.value;
 		if(clientChoice == 'User'){
+			console.log(currentTime);
 			this.props.history.push('/UserName');
 		}
 		if(clientChoice == 'Admin'){
@@ -63,7 +65,7 @@ var Selector = React.createClass({
 				<div className = "main-container">
 					<div className="jumbotron" style={jumboStyle}>
 						<h2 className="text-center"><strong>(ReactJS) Store and Share Everything Important</strong></h2>
-						<h3 className="text-center">Search for and save articles of interest.</h3>
+						<h3 className="text-center"></h3>
 						<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<div class="row">
 								<button value='User' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>User</button>

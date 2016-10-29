@@ -3,7 +3,8 @@ var Router = require('react-router');
 var User = require('./User');
 
 
-// Create the Main component
+// This is the first component in User workflow
+// Component gets user name, and passes it on to the User component props.
 var UserName = React.createClass({
 	getInitialState: function(){
 		return {

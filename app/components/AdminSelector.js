@@ -12,17 +12,17 @@ var adminBoxStyle = {
 }
 
 
-var Admin = React.createClass({
+var AdminSelector = React.createClass({
 	buttonClicked: function(event){
 		console.log(event.target.value);
 		var clientChoice = event.target.value;
 		if(clientChoice == 'viewSurvey'){
 			
-			this.props.history.push("/AdminSelector");
+			this.props.history.push("/User");
 		}
-		if(clientChoice == 'makeSurvey'){
+		if(clientChoice == 'viewUsers'){
 			console.log(this.props.history);
-			this.props.history.push('/SurveyMakerName');
+			this.props.history.push('/AdminUserList');
 		}
 	},
 
@@ -36,18 +36,18 @@ var Admin = React.createClass({
 
 							<div className="panel panel-primary" style={adminBoxStyle}>
 								<div className="panel-heading">
-									<h1 className="panel-title"><strong><i className="fa fa-newspaper-o" aria-hidden="true"></i>  Admin</strong></h1>
+									<h1 className="panel-title"><strong><i className="fa fa-newspaper-o" aria-hidden="true"></i>  Admin Selector</strong></h1>
 								</div>
 								<div className="panel-body">
 
 									<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 											<div class="row">
-												<button value='viewSurvey' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>View Survey</button>
+												<button value='viewSurvey' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>View Survey's</button>
 											</div>
 									</div>
 									<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
 											<div className="row">
-												<button value='makeSurvey' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>Create Survey</button>
+												<button value='viewUsers' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>View User's</button>
 											</div>
 									</div>		
 
@@ -68,4 +68,4 @@ var Admin = React.createClass({
 
 
 // Export the module back to the route
-module.exports = Admin;
+module.exports = AdminSelector;
