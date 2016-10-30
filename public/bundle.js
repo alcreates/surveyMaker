@@ -27420,6 +27420,7 @@
 	var AdminSelector = __webpack_require__(269);
 	var AdminUserList = __webpack_require__(270);
 	var AdminUserSurveyList = __webpack_require__(271);
+	var AdminUserSurvey = __webpack_require__(272);
 	// Export the Routes
 	module.exports = React.createElement(
 		Route,
@@ -27430,6 +27431,7 @@
 		React.createElement(Route, { path: 'UserName', component: UserName }),
 		React.createElement(Route, { path: 'AdminSelector', component: AdminSelector }),
 		React.createElement(Route, { path: 'AdminUserList', component: AdminUserList }),
+		React.createElement(Route, { path: 'AdminUserSurvey', component: AdminUserSurvey }),
 		React.createElement(Route, { path: 'AdminUserSurveyList', component: AdminUserSurveyList }),
 		React.createElement(Route, { path: 'SurveyMakerName', component: SurveyMakerName }),
 		React.createElement(Route, { path: 'SurveyMaker', component: SurveyMaker }),
@@ -27727,30 +27729,14 @@
 	// Helper Functions (in this case the only one is runQuery)
 	var helpers = {
 
-		// This will run our query.
-		runQuery: function runQuery(term, start, end) {
-
-			// Adjust to get search terms in proper format
-			var term = term.trim();
-			var start = start.trim() + "0101";
-			var end = end.trim() + "1231";
-
-			console.log("Query Run");
-			// Run a query using Axios. Then return the results as an object with an array.
-			// See the Axios documentation for details on how we structured this with the params.
-			return axios.get('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
-				params: {
-					'api-key': APIKey,
-					'q': term,
-					'begin_date': start,
-					'end_date': end
-				}
-			}).then(function (results) {
-				console.log("Axios Results", results.data.response);
-
-				return results.data.response;
+		getSelectedSurvey: function getSelectedSurvey(name) {
+			console.log("this is survey user name axios : " + name);
+			return axios.get('/selectedSurvey', { params: { 'title': name } }).then(function (results) {
+				console.log("axios results", results);
+				return results;
 			});
 		},
+
 		getSelectedUserSurveys: function getSelectedUserSurveys(name) {
 			console.log("this is survey user name axios : " + name);
 			return axios.get('/selectedUserSurveys', { params: { 'userName': name } }).then(function (results) {
@@ -30681,7 +30667,7 @@
 	var Router = __webpack_require__(1);
 	var helpers = __webpack_require__(238);
 	var UserSurvey = __webpack_require__(258);
-
+	var AdminUserSurvey = __webpack_require__(272);
 	//Second component is User workflow
 	//Component takes the user name from the props and sets it to the state
 
@@ -30740,11 +30726,23 @@
 				);
 			} // if the client has made a choice, they will be forwarded to UserSurvey component where they will be able to fill out the survey they chose. 
 			else if (this.state.clientChoice) {
-					var names = this.state.savedSurveys;
+					var surveys = this.state.savedSurveys;
 					var choice = this.state.clientChoice;
+					var result = surveys[choice];
+					var answers = result.answers;
+					var userName = result.userName;
+					var type = result.surveyType;
+					var answersArr = [];
+
+					Object.keys(answers).forEach(function (key) {
+						answersArr.push(answers[key]);
+					});
+
+					console.log(answersArr);
+					console.log("this is UserSurvey type " + result.answers[0]);
 					// surveyPick - questionaires are an array of objects - choice is the index of the objects.
 					// name - was obtained from the userName component. 
-					return React.createElement(AdminUserSurveyList, { userPick: names[choice] });
+					return React.createElement(AdminUserSurvey, { name: userName, type: type, answers: answersArr });
 				} else {
 					// This function will iterate through savedSurveys and conduct the following to each
 					// and will be added to unorder list in the following return statement.
@@ -30765,7 +30763,7 @@
 										React.createElement(
 											'em',
 											null,
-											survey.userName
+											survey.surveyType
 										)
 									),
 									React.createElement(
@@ -30806,7 +30804,8 @@
 										'strong',
 										null,
 										React.createElement('i', { className: 'fa fa-download', 'aria-hidden': 'true' }),
-										' Users'
+										' ',
+										this.state.userName
 									)
 								)
 							),
@@ -30829,6 +30828,166 @@
 
 	// Export the module back to the route
 	module.exports = AdminUserSurveyList;
+
+/***/ },
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(3);
+	var Router = __webpack_require__(1);
+	var helpers = __webpack_require__(238);
+	var UserSurvey = __webpack_require__(258);
+
+	//Second component is User workflow
+	//Component takes the user name from the props and sets it to the state
+
+	var AdminUserSurvey = React.createClass({
+		displayName: 'AdminUserSurvey',
+
+		getInitialState: function getInitialState() {
+			return {
+				userName: this.props.name,
+				answers: this.props.answers,
+				surveyType: this.props.type,
+				selectedSurveyQuestions: "",
+				clientChoice: ""
+			};
+		},
+		//Once the component mounts, it will make a call to our data base to get available surveys
+		// And set its results to savedSurveys state making them available to the component. 
+		componentDidMount: function componentDidMount() {
+			console.log("did mount survey Type = " + this.state.userSurvey);
+			// helpers.getSelectedSurvey(this.state.surveyType)
+			// 	.then(function(Data){
+			// 		this.setState({
+			// 			savedSurveys: Data.data
+			// 		});
+			// 		console.log("user survey results " + Data.data);
+			// 	}.bind(this))
+		},
+
+		// A button is attached to each survey in order to let the user be able to pick a survey
+		// And this function adds the chosen survey's value to the clientChoice state.  	
+		handleButton: function handleButton(event) {
+
+			console.log(event.target.value);
+			console.log(this.state.savedSurveys);
+			this.setState({ clientChoice: event.target.value });
+		},
+
+		// /*This code handles the sending of the search terms to the parent Search component*/
+
+		render: function render() {
+			if (this.state.answers == "") {
+				return React.createElement(
+					'li',
+					{ className: 'list-group-item' },
+					React.createElement(
+						'h3',
+						null,
+						React.createElement(
+							'span',
+							null,
+							React.createElement(
+								'em',
+								null,
+								'No  available ...'
+							)
+						)
+					)
+				);
+			} // if the client has made a choice, they will be forwarded to UserSurvey component where they will be able to fill out the survey they chose. 
+			else if (this.state.clientChoice) {
+					var names = this.state.savedSurveys;
+					var choice = this.state.clientChoice;
+					console.log('name picked =' + names[choice]);
+					// surveyPick - questionaires are an array of objects - choice is the index of the objects.
+					// name - was obtained from the userName component. 
+					return React.createElement(AdminUserSurveyList, { userPick: names[choice] });
+				} else {
+
+					var maker = this.state.answers.map(function (answer, index) {
+						return React.createElement(
+							'div',
+							{ key: index },
+							React.createElement(
+								'li',
+								{ className: 'list-group-item' },
+								React.createElement(
+									'h3',
+									null,
+									React.createElement(
+										'span',
+										null,
+										React.createElement(
+											'em',
+											null,
+											answer
+										)
+									),
+									React.createElement(
+										'span',
+										{ className: 'btn-group pull-right' },
+										React.createElement(
+											'button',
+											{ value: index, onClick: this.handleButton, className: 'btn btn-default ' },
+											'View Survey'
+										)
+									)
+								)
+							)
+						);
+					}.bind(this));
+				}
+
+			return React.createElement(
+				'div',
+				{ className: 'main-container' },
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'div',
+						{ className: 'col-lg-12' },
+						React.createElement(
+							'div',
+							{ className: 'panel panel-primary' },
+							React.createElement(
+								'div',
+								{ className: 'panel-heading' },
+								React.createElement(
+									'h1',
+									{ className: 'panel-title' },
+									React.createElement(
+										'strong',
+										null,
+										React.createElement('i', { className: 'fa fa-download', 'aria-hidden': 'true' }),
+										' ',
+										this.state.userName
+									)
+								)
+							),
+							React.createElement(
+								'div',
+								{ className: 'panel-body' },
+								React.createElement(
+									'ul',
+									{ className: 'list-group' },
+									maker
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+
+	});
+
+	// Export the module back to the route
+	module.exports = AdminUserSurvey;
 
 /***/ }
 /******/ ]);

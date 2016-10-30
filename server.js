@@ -112,6 +112,23 @@ app.get('/selectedUserSurveys', function(req, res) {
 		})
 });
 
+app.get('/selectedSurvey', function(req, res) {
+     console.log("selected user Survey req " + req.param('title'));
+
+		Survey.find({'title':req.param('title') })
+		.exec(function(err, doc){
+
+			console.log(doc);
+
+			if(err){
+				console.log(err);
+			}
+			else {
+				res.send(doc);
+			}
+		})
+});
+
 
 
 // Route to add an survey to saved list

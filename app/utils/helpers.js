@@ -7,36 +7,16 @@ var APIKey = "9d4a8986921972b65754ea0809d47c84:12:74623931";
 // Helper Functions (in this case the only one is runQuery)
 var helpers = {
 
-	// This will run our query.
-	runQuery: function(term, start, end){
-
-		// Adjust to get search terms in proper format
-		var term = term.trim();
-		var start = start.trim() + "0101";
-		var end = end.trim() + "1231";
-
-
-		console.log("Query Run");
-		// Run a query using Axios. Then return the results as an object with an array.
-		// See the Axios documentation for details on how we structured this with the params.
-		return axios.get('https://api.nytimes.com/svc/search/v2/articlesearch.json', {
-			params: {
-			    'api-key': APIKey,
-			    'q': term,
-			    'begin_date': start,
-			    'end_date': end			
-			}
-		})
-		.then(function(results){
-			console.log("Axios Results", results.data.response);
-
-			return results.data.response;
-
-		});
-
-
-
+	
+	getSelectedSurvey: function(name){
+			console.log("this is survey user name axios : " + name)
+		return axios.get('/selectedSurvey',{params:{'title': name}})
+			.then(function(results){
+				console.log("axios results", results);
+				return results;
+			})
 	},
+
 	getSelectedUserSurveys: function(name){
 			console.log("this is survey user name axios : " + name)
 		return axios.get('/selectedUserSurveys',{params:{'userName': name}})
