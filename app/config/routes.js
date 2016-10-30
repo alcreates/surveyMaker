@@ -29,6 +29,7 @@ var AdminUserSurveyList = require('../components/AdminUserSurveyList');
 var AdminUserSurvey = require('../components/AdminUserSurvey');
 var AdminSurveySearch = require('../components/AdminSurveySearch');
 var AdminSurveyResults = require('../components/AdminSurveySearch');
+var AdminUserResults2 = require('../components/AdminUserResults2');
 // Export the Routes
 module.exports = (
 
@@ -39,6 +40,9 @@ module.exports = (
 		<Route path='Selector' component={Selector}/>
 			
 			<Route path='User' component={User} />
+			<Route path='AdminUserResults2' component={AdminUserResults2} />
+			
+
 			<Route path='AdminSurveySearch' component={AdminSurveySearch} />
 			<Route path='AdminSurveyResults' component={AdminSurveyResults} />
 			<Route path='Admin' component={Admin} /> 
