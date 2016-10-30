@@ -19,7 +19,7 @@ var AdminSelector = React.createClass({
 		var clientChoice = event.target.value;
 		if(clientChoice == 'viewSurvey'){
 			
-			this.props.history.push("/User");
+			this.props.history.push("/AdminSurveySearch");
 		}
 		if(clientChoice == 'viewUsers'){
 			console.log(this.props.history);

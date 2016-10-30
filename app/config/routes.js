@@ -27,6 +27,8 @@ var AdminSelector = require('../components/AdminSelector');
 var AdminUserList = require('../components/AdminUserList');
 var AdminUserSurveyList = require('../components/AdminUserSurveyList');
 var AdminUserSurvey = require('../components/AdminUserSurvey');
+var AdminSurveySearch = require('../components/AdminSurveySearch');
+var AdminSurveyResults = require('../components/AdminSurveySearch');
 // Export the Routes
 module.exports = (
 
@@ -35,18 +37,20 @@ module.exports = (
 
 		{/* If user selects Search or Saved show the appropriate component*/}
 		<Route path='Selector' component={Selector}/>
-		
+			
 			<Route path='User' component={User} />
+			<Route path='AdminSurveySearch' component={AdminSurveySearch} />
+			<Route path='AdminSurveyResults' component={AdminSurveyResults} />
 			<Route path='Admin' component={Admin} /> 
 			<Route path='UserName' component={UserName}/>
 			<Route path='AdminSelector' component={AdminSelector}/>
 			<Route path='AdminUserList' component={AdminUserList}/>
 			<Route path='AdminUserSurvey' component={AdminUserSurvey}/>
 			<Route path='AdminUserSurveyList' component={AdminUserSurveyList}/>
-		<Route path='SurveyMakerName' component={SurveyMakerName} />
-		<Route path='SurveyMaker' component={SurveyMaker} />
-		<Route path='SurveyMakerFinnish' component={SurveyMakerFinnish}/>
-		<Route path='UserSurvey' component={UserSurvey}/>
+			<Route path='SurveyMakerName' component={SurveyMakerName} />
+			<Route path='SurveyMaker' component={SurveyMaker} />
+			<Route path='SurveyMakerFinnish' component={SurveyMakerFinnish}/>
+			<Route path='UserSurvey' component={UserSurvey}/>
 		
 		{/*If user selects any other path... we get the Home Route*/}
 		<IndexRoute component={Selector} />

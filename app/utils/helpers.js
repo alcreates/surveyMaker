@@ -7,6 +7,14 @@ var APIKey = "9d4a8986921972b65754ea0809d47c84:12:74623931";
 // Helper Functions (in this case the only one is runQuery)
 var helpers = {
 
+	getUsersBySurvey: function(survey){
+			console.log("this is survey user name axios : " + survey)
+		return axios.get('/usersBySurvey',{params:{'surveyType': survey}})
+			.then(function(results){
+				console.log("selected survey results", results);
+				return results;
+			})
+	},
 	
 	getSelectedSurvey: function(name){
 			console.log("this is survey user name axios : " + name)

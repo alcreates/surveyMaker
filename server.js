@@ -111,6 +111,23 @@ app.get('/selectedUserSurveys', function(req, res) {
 			}
 		})
 });
+app.get('/usersBySurvey', function(req, res) {
+     console.log("selected user Survey req " + req.param('surveyType'));
+
+		UserSurvey.find({'surveyType':req.param('surveyType') })
+		.exec(function(err, doc){
+
+			console.log(doc);
+
+			if(err){
+				console.log(err);
+			}
+			else {
+				res.send(doc);
+			}
+		})
+});
+
 
 app.get('/selectedSurvey', function(req, res) {
      console.log("selected user Survey req " + req.param('title'));
