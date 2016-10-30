@@ -6,8 +6,9 @@ var buttonStyle = {
 	position: 'relative',
 	top: 100,
 }
+var image = 'http://www.tpi.org/sites/default/files/styles/lead-image/public/images/lead-images/grants-adminmgmt_lead.jpg?itok=Gn3-UIMD'
 var adminBoxStyle = {
-
+	backgroundImage: 'url(' + image + ')',
 	height: 500
 }
 

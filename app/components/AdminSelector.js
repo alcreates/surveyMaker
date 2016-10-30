@@ -6,9 +6,10 @@ var buttonStyle = {
 	position: 'relative',
 	top: 100,
 }
+var image = 'http://www.menaentrepreneur.org/wp-content/uploads/2016/08/seengine.jpg'
 var adminBoxStyle = {
-
-	height: 500
+	backgroundImage: 'url(' + image + ')',
+	height: 600
 }
 
 
@@ -42,12 +43,12 @@ var AdminSelector = React.createClass({
 
 									<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 											<div class="row">
-												<button value='viewSurvey' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>View Survey's</button>
+												<button value='viewSurvey' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>Search Survey's</button>
 											</div>
 									</div>
 									<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
 											<div className="row">
-												<button value='viewUsers' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>View User's</button>
+												<button value='viewUsers' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>Search User's</button>
 											</div>
 									</div>		
 

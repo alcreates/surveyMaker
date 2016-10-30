@@ -12,7 +12,7 @@ var helpers = {
 			console.log("this is survey user name axios : " + name)
 		return axios.get('/selectedSurvey',{params:{'title': name}})
 			.then(function(results){
-				console.log("axios results", results);
+				console.log("selected survey results", results);
 				return results;
 			})
 	},

@@ -27732,7 +27732,7 @@
 		getSelectedSurvey: function getSelectedSurvey(name) {
 			console.log("this is survey user name axios : " + name);
 			return axios.get('/selectedSurvey', { params: { 'title': name } }).then(function (results) {
-				console.log("axios results", results);
+				console.log("selected survey results", results);
 				return results;
 			});
 		},
@@ -30204,8 +30204,9 @@
 		position: 'relative',
 		top: 100
 	};
+	var image = 'http://www.tpi.org/sites/default/files/styles/lead-image/public/images/lead-images/grants-adminmgmt_lead.jpg?itok=Gn3-UIMD';
 	var adminBoxStyle = {
-
+		backgroundImage: 'url(' + image + ')',
 		height: 500
 	};
 
@@ -30406,9 +30407,10 @@
 		position: 'relative',
 		top: 100
 	};
+	var image = 'http://www.menaentrepreneur.org/wp-content/uploads/2016/08/seengine.jpg';
 	var adminBoxStyle = {
-
-		height: 500
+		backgroundImage: 'url(' + image + ')',
+		height: 600
 	};
 
 	var AdminSelector = React.createClass({
@@ -30467,7 +30469,7 @@
 										React.createElement(
 											'button',
 											{ value: 'viewSurvey', onClick: this.buttonClicked, type: 'button', className: 'btn btn-primary center-block', style: buttonStyle },
-											'View Survey\'s'
+											'Search Survey\'s'
 										)
 									)
 								),
@@ -30480,7 +30482,7 @@
 										React.createElement(
 											'button',
 											{ value: 'viewUsers', onClick: this.buttonClicked, type: 'button', className: 'btn btn-primary center-block', style: buttonStyle },
-											'View User\'s'
+											'Search User\'s'
 										)
 									)
 								)
@@ -30858,23 +30860,24 @@
 		//Once the component mounts, it will make a call to our data base to get available surveys
 		// And set its results to savedSurveys state making them available to the component. 
 		componentDidMount: function componentDidMount() {
-			console.log("did mount survey Type = " + this.state.userSurvey);
-			// helpers.getSelectedSurvey(this.state.surveyType)
-			// 	.then(function(Data){
-			// 		this.setState({
-			// 			savedSurveys: Data.data
-			// 		});
-			// 		console.log("user survey results " + Data.data);
-			// 	}.bind(this))
+			console.log("did mount survey Type = " + this.state.surveyType);
+			helpers.getSelectedSurvey(this.state.surveyType).then(function (Data) {
+
+				this.setState({
+					selectedSurveyQuestions: Data.data[0].questions
+				});
+			}.bind(this));
 		},
 
 		// A button is attached to each survey in order to let the user be able to pick a survey
 		// And this function adds the chosen survey's value to the clientChoice state.  	
 		handleButton: function handleButton(event) {
 
-			console.log(event.target.value);
-			console.log(this.state.savedSurveys);
-			this.setState({ clientChoice: event.target.value });
+			// console.log(event.target.value)
+			// console.log(this.state.savedSurveys);
+			// this.setState({clientChoice: event.target.value});
+
+			console.log(questions);
 		},
 
 		// /*This code handles the sending of the search terms to the parent Search component*/
@@ -30908,6 +30911,8 @@
 					return React.createElement(AdminUserSurveyList, { userPick: names[choice] });
 				} else {
 
+					var questions = this.state.selectedSurveyQuestions;
+
 					var maker = this.state.answers.map(function (answer, index) {
 						return React.createElement(
 							'div',
@@ -30924,16 +30929,23 @@
 										React.createElement(
 											'em',
 											null,
-											answer
+											' ',
+											questions[index],
+											' '
 										)
-									),
+									)
+								),
+								React.createElement(
+									'h4',
+									null,
 									React.createElement(
 										'span',
-										{ className: 'btn-group pull-right' },
+										null,
 										React.createElement(
-											'button',
-											{ value: index, onClick: this.handleButton, className: 'btn btn-default ' },
-											'View Survey'
+											'em',
+											null,
+											' ',
+											answer
 										)
 									)
 								)

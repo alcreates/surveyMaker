@@ -3,6 +3,7 @@ var Router = require('react-router');
 var helpers = require('../utils/helpers.js');
 var UserSurvey = require('./UserSurvey');
 
+
 //Second component is User workflow
 //Component takes the user name from the props and sets it to the state
 
@@ -19,24 +20,28 @@ var AdminUserSurvey = React.createClass({
 //Once the component mounts, it will make a call to our data base to get available surveys
 // And set its results to savedSurveys state making them available to the component. 
 	componentDidMount(){
-        console.log("did mount survey Type = " + this.state.userSurvey);
-		// helpers.getSelectedSurvey(this.state.surveyType)
-		// 	.then(function(Data){
-		// 		this.setState({
-		// 			savedSurveys: Data.data
-		// 		});
-		// 		console.log("user survey results " + Data.data);
-		// 	}.bind(this))
+        console.log("did mount survey Type = " + this.state.surveyType);
+		helpers.getSelectedSurvey(this.state.surveyType)
+			.then(function(Data){
+				
+				
+
+				this.setState({
+					 selectedSurveyQuestions: Data.data[0].questions
+				});
+				
+				
+			}.bind(this));
 	},
 // A button is attached to each survey in order to let the user be able to pick a survey
 // And this function adds the chosen survey's value to the clientChoice state.  	
 	handleButton:function(event){
 		
-		console.log(event.target.value)
-		console.log(this.state.savedSurveys);
-		this.setState({clientChoice: event.target.value});
+		// console.log(event.target.value)
+		// console.log(this.state.savedSurveys);
+		// this.setState({clientChoice: event.target.value});
 		
-
+			console.log(questions)
 	},
 
 	// /*This code handles the sending of the search terms to the parent Search component*/
@@ -68,7 +73,7 @@ var AdminUserSurvey = React.createClass({
 
 		}else{
 
-
+		var questions = this.state.selectedSurveyQuestions
 		
 		var maker = this.state.answers.map(function(answer, index){
 			return(
@@ -78,12 +83,11 @@ var AdminUserSurvey = React.createClass({
 						  <li className="list-group-item" >
 
 							<h3>
-							  	<span><em>{answer}</em></span>
-								<span className="btn-group pull-right" >
-									<button value={index} onClick={this.handleButton} className="btn btn-default ">View Survey</button>
-									
-								</span>
+								<span><em> {questions[index]} </em></span>
+							  	
+								
 							</h3>
+							<h4><span><em> {answer}</em></span></h4>
 							
 
 						  </li>
