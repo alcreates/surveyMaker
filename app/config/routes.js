@@ -14,7 +14,7 @@ var IndexRoute	= Router.IndexRoute;
 var Selector = require('../components/Selector');
 
 var Main = require('../components/Main');
-var Search = require('../components/Search'); 
+
 var Saved = require('../components/Saved');
 var User = require('../components/User');
 var Admin = require('../components/Admin');
@@ -30,6 +30,8 @@ var AdminUserSurvey = require('../components/AdminUserSurvey');
 var AdminSurveySearch = require('../components/AdminSurveySearch');
 var AdminSurveyResults = require('../components/AdminSurveySearch');
 var AdminUserResults2 = require('../components/AdminUserResults2');
+var UserFinnish = require('../components/UserFinnish');
+
 // Export the Routes
 module.exports = (
 
@@ -41,7 +43,7 @@ module.exports = (
 			
 			<Route path='User' component={User} />
 			<Route path='AdminUserResults2' component={AdminUserResults2} />
-			
+			<Route path='UserFinnish' component={UserFinnish}/>
 
 			<Route path='AdminSurveySearch' component={AdminSurveySearch} />
 			<Route path='AdminSurveyResults' component={AdminSurveyResults} />

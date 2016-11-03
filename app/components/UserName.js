@@ -2,7 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var User = require('./User');
 
-
+// USER # 1
 // This is the first component in User workflow
 // Component gets user name, and passes it on to the User component props.
 var UserName = React.createClass({
@@ -20,10 +20,10 @@ var UserName = React.createClass({
    			
    			 this.setState({submitted: true})
   		},
-  	componentWillMount() {
+  	componentWillUnMount() {
   		this.setState({submitted:false, userName: ""});
   		
-  		console.log("will mount;")
+  		console.log("will unmount;")
   	},
 
 
@@ -40,11 +40,11 @@ var UserName = React.createClass({
 
 							<div className="panel panel-primary">
 								<div className="panel-heading">
-									<h1 className="panel-title"><strong><i className="fa fa-newspaper-o" aria-hidden="true"></i> Survey Name</strong></h1>
+									<h1 className="panel-title"><strong><i className="fa fa-newspaper-o" aria-hidden="true"></i> User Name</strong></h1>
 								</div>
 								<div className="panel-body">
 
-									<h1>This is the userName page</h1>
+									<h1>Enter your name</h1>
 									 <input type="text"
           								placeholder="Hello!"
          								 value={this.state.userName}

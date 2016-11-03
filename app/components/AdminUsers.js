@@ -6,7 +6,7 @@ var UserSurvey = require('./UserSurvey');
 //Second component is User workflow
 //Component takes the user name from the props and sets it to the state
 
-var User = React.createClass({
+var AdminUsers = React.createClass({
 	getInitialState: function(){
 		return {
 			userName: this.props.name,
@@ -15,7 +15,7 @@ var User = React.createClass({
 		}
 	},
 //Once the component mounts, it will make a call to our data base to get available surveys
-// And sets its results to savedSurveys state making them available to the component. 
+// And set its results to savedSurveys state making them available to the component. 
 	componentDidMount(){
 
 		helpers.getSaved()
@@ -97,12 +97,13 @@ var User = React.createClass({
 		// Returns the list of surveys.
 		return(
 			<div className="main-container">
+
 				<div className="row">
 					<div className="col-lg-12">
 
 						<div className="panel panel-primary">
 							<div className="panel-heading">
-								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Choose a Survey</strong></h1>
+								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Search by Survey</strong></h1>
 							</div>
 							<div className="panel-body">
 								<ul className="list-group">
@@ -126,4 +127,4 @@ var User = React.createClass({
 
 
 // Export the module back to the route
-module.exports = User;
+module.exports = AdminUsers;

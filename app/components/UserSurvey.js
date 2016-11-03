@@ -2,7 +2,10 @@
 var React = require('react');
 var Router = require('react-router');
 var helpers = require('../utils/helpers');
+var UserFinnish = require('./UserFinnish');
 var answers = {};
+
+//USER # 3
 
 // Include the Helper (for the query)
 var helpers = require('../utils/helpers');
@@ -16,7 +19,8 @@ var UserSurvey = React.createClass({
 			userName: this.props.name,
 			questionTitle: this.props.surveyPick.title,
 			questions: this.props.surveyPick.questions,
-			response:[]
+			response:[],
+			submit: false,
 
 		}
 	},
@@ -28,6 +32,7 @@ var UserSurvey = React.createClass({
 		helpers.userSurveySaved(this.state.userName, this.state.questionTitle, answers)
 			.then(function(data){
 				console.log("userSurvey worked");
+				this.setState({submit:true})
 			}.bind(this))
 
 
@@ -49,6 +54,11 @@ var UserSurvey = React.createClass({
 
 	/*Render the function. Note how we deploy both the Query and the Results*/
 	render: function(){
+ 		if(this.state.submit){
+ 			return(<UserFinnish />);
+
+ 		}
+		
 		
 		var questionCompiler = this.state.questions.map(function(question, index){
 
@@ -92,7 +102,7 @@ var UserSurvey = React.createClass({
 			<div className="main-container"> 
 
 				{/*Note how we pass the setQuery function to enable Query to perform searches*/}
-				<h1>This is the User Survey page</h1>
+				
 				<h2>{this.state.questionTitle}</h2>
 				<div className="panel-body">
 								<ul className="list-group">

@@ -88,7 +88,7 @@ var AdminSurveyResults = React.createClass({
 							<h3>
 							  	<span><em>{user}</em></span>
 								<span className="btn-group pull-right" >
-									<button value={index} onClick={this.handleButton} className="btn btn-default ">Veiw User Survey's</button>
+									<button value={index} onClick={this.handleButton} className="btn btn-default ">Veiw</button>
 									
 								</span>
 							</h3>
@@ -111,7 +111,7 @@ var AdminSurveyResults = React.createClass({
 
 						<div className="panel panel-primary">
 							<div className="panel-heading">
-								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Survey Users</strong></h1>
+								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i>Users that completed</strong></h1>
 							</div>
 							<div className="panel-body">
 								<ul className="list-group">

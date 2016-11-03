@@ -27408,22 +27408,24 @@
 	var Selector = __webpack_require__(236);
 
 	var Main = __webpack_require__(262);
-	var Search = __webpack_require__(263);
-	var Saved = __webpack_require__(266);
+
+	var Saved = __webpack_require__(263);
 	var User = __webpack_require__(237);
-	var Admin = __webpack_require__(267);
+	var Admin = __webpack_require__(264);
 	var SurveyMakerName = __webpack_require__(259);
 	var SurveyMaker = __webpack_require__(260);
 	var SurveyMakerFinnish = __webpack_require__(261);
 	var UserSurvey = __webpack_require__(258);
-	var UserName = __webpack_require__(268);
-	var AdminSelector = __webpack_require__(269);
-	var AdminUserList = __webpack_require__(270);
-	var AdminUserSurveyList = __webpack_require__(271);
-	var AdminUserSurvey = __webpack_require__(272);
-	var AdminSurveySearch = __webpack_require__(274);
-	var AdminSurveyResults = __webpack_require__(274);
-	var AdminUserResults2 = __webpack_require__(276);
+	var UserName = __webpack_require__(265);
+	var AdminSelector = __webpack_require__(266);
+	var AdminUserList = __webpack_require__(267);
+	var AdminUserSurveyList = __webpack_require__(268);
+	var AdminUserSurvey = __webpack_require__(269);
+	var AdminSurveySearch = __webpack_require__(270);
+	var AdminSurveyResults = __webpack_require__(270);
+	var AdminUserResults2 = __webpack_require__(272);
+	var UserFinnish = __webpack_require__(273);
+
 	// Export the Routes
 	module.exports = React.createElement(
 		Route,
@@ -27431,6 +27433,7 @@
 		React.createElement(Route, { path: 'Selector', component: Selector }),
 		React.createElement(Route, { path: 'User', component: User }),
 		React.createElement(Route, { path: 'AdminUserResults2', component: AdminUserResults2 }),
+		React.createElement(Route, { path: 'UserFinnish', component: UserFinnish }),
 		React.createElement(Route, { path: 'AdminSurveySearch', component: AdminSurveySearch }),
 		React.createElement(Route, { path: 'AdminSurveyResults', component: AdminSurveyResults }),
 		React.createElement(Route, { path: 'Admin', component: Admin }),
@@ -27588,7 +27591,7 @@
 			};
 		},
 		//Once the component mounts, it will make a call to our data base to get available surveys
-		// And set its results to savedSurveys state making them available to the component. 
+		// And sets its results to savedSurveys state making them available to the component. 
 		componentDidMount: function componentDidMount() {
 
 			helpers.getSaved().then(function (Data) {
@@ -27674,6 +27677,7 @@
 					}.bind(this));
 				}
 
+			// Returns the list of surveys.
 			return React.createElement(
 				'div',
 				{ className: 'main-container' },
@@ -27696,7 +27700,7 @@
 										'strong',
 										null,
 										React.createElement('i', { className: 'fa fa-download', 'aria-hidden': 'true' }),
-										' Saved Articles'
+										' Choose a Survey'
 									)
 								)
 							),
@@ -28993,7 +28997,10 @@
 	var React = __webpack_require__(3);
 	var Router = __webpack_require__(1);
 	var helpers = __webpack_require__(238);
+	var UserFinnish = __webpack_require__(273);
 	var answers = {};
+
+	//USER # 3
 
 	// Include the Helper (for the query)
 	var helpers = __webpack_require__(238);
@@ -29009,7 +29016,8 @@
 				userName: this.props.name,
 				questionTitle: this.props.surveyPick.title,
 				questions: this.props.surveyPick.questions,
-				response: []
+				response: [],
+				submit: false
 
 			};
 		},
@@ -29020,6 +29028,7 @@
 			console.log(this.state.questionTitle);
 			helpers.userSurveySaved(this.state.userName, this.state.questionTitle, answers).then(function (data) {
 				console.log("userSurvey worked");
+				this.setState({ submit: true });
 			}.bind(this));
 		},
 
@@ -29036,6 +29045,9 @@
 		},
 
 		/*Render the function. Note how we deploy both the Query and the Results*/render: function render() {
+			if (this.state.submit) {
+				return React.createElement(UserFinnish, null);
+			}
 
 			var questionCompiler = this.state.questions.map(function (question, index) {
 
@@ -29071,11 +29083,6 @@
 			return React.createElement(
 				'div',
 				{ className: 'main-container' },
-				React.createElement(
-					'h1',
-					null,
-					'This is the User Survey page'
-				),
 				React.createElement(
 					'h2',
 					null,
@@ -29180,10 +29187,10 @@
 									React.createElement(
 										'h1',
 										null,
-										'This is the surveyMakerName page'
+										'Enter Survey Name'
 									),
 									React.createElement('input', { type: 'text',
-										placeholder: 'Hello!',
+										placeholder: 'Survey Name',
 										value: this.state.surveyName,
 										onChange: this.handleChange }),
 									React.createElement(
@@ -29292,11 +29299,6 @@
 								React.createElement(
 									'div',
 									{ className: 'panel-body' },
-									React.createElement(
-										'h1',
-										null,
-										'This is the surveyMaker page'
-									),
 									React.createElement('input', { type: 'text',
 										placeholder: 'Add question!',
 										value: this.state.question,
@@ -29373,7 +29375,7 @@
 									React.createElement(
 										'h1',
 										null,
-										'This is the surveyMaker page'
+										'Add a question'
 									),
 									React.createElement('input', { type: 'text',
 										placeholder: 'Add question!',
@@ -29411,7 +29413,7 @@
 											'strong',
 											null,
 											React.createElement('i', { className: 'fa fa-download', 'aria-hidden': 'true' }),
-											' Saved Articles'
+											' added questions'
 										)
 									)
 								),
@@ -29599,28 +29601,7 @@
 							React.createElement(
 								'div',
 								{ className: 'collapse navbar-collapse navbar-ex1-collapse' },
-								React.createElement(
-									'ul',
-									{ className: 'nav navbar-nav navbar-right' },
-									React.createElement(
-										'li',
-										null,
-										React.createElement(
-											'a',
-											{ href: '#/search' },
-											'User'
-										)
-									),
-									React.createElement(
-										'li',
-										null,
-										React.createElement(
-											'a',
-											{ href: '#/saved' },
-											'Admin'
-										)
-									)
-								)
+								React.createElement('ul', { className: 'nav navbar-nav navbar-right' })
 							)
 						)
 					),
@@ -29650,393 +29631,6 @@
 
 /***/ },
 /* 263 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	// Include React and React-Router dependencies
-	var React = __webpack_require__(3);
-	var Router = __webpack_require__(1);
-
-	// Include the Query and Results componens
-	var Query = __webpack_require__(264);
-	var Results = __webpack_require__(265);
-
-	// Include the Helper (for the query)
-	var helpers = __webpack_require__(238);
-
-	// Create the Main component
-	var Search = React.createClass({
-		displayName: 'Search',
-
-
-		/*Here we set the initial state variables (this allows us to propagate the variables for maniuplation by the children components*/
-		/*Also note the "resuls" state. This will be where we hold the data from our results*/
-		getInitialState: function getInitialState() {
-			return {
-				queryTerm: "",
-				startYear: "",
-				endYear: "",
-				results: {}
-			};
-		},
-
-		/*This function gets called if the user searches for a completely new set of parameters (i.e. if any of the search terms changes)*/
-		/*If the user searches for the exact same thing, then React will ignore it.*/
-		componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-			console.log("COMPONENT UPDATED");
-			console.log(this.state.queryTerm);
-			console.log(this.state.startYear);
-			console.log(this.state.endYear);
-
-			console.log("Previous State", prevState);
-
-			if (this.state.queryTerm != "" && (prevState.queryTerm != this.state.queryTerm || prevState.startYear != this.state.startYear || prevState.endYear != this.state.endYear)) {
-				helpers.runQuery(this.state.queryTerm, this.state.startYear, this.state.endYear).then(function (data) {
-					if (data != this.state.results) {
-						this.setState({
-							results: data
-						});
-					}
-
-					// console.log("RESULTS", results)
-					// console.log("DATA", data)
-
-					// This code is necessary to bind the keyword "this" when we say this.setState 
-					// to actually mean the component itself and not the runQuery function.
-				}.bind(this));
-			}
-		},
-
-		// This function will be passed down into children components so they can change the "parent"
-		// i.e we will pass this method to the query component that way it can change the main component 
-		// to perform a new search
-		setQuery: function setQuery(newQuery, newStart, newEnd) {
-			console.log("TEST");
-			this.setState({
-				queryTerm: newQuery,
-				startYear: newStart,
-				endYear: newEnd
-			});
-		},
-
-		/*Render the function. Note how we deploy both the Query and the Results*/render: function render() {
-			console.log("Render Results", this.state.results);
-
-			return React.createElement(
-				'div',
-				{ className: 'main-container' },
-				React.createElement(Query, { updateSearch: this.setQuery }),
-				React.createElement(Results, { results: this.state.results })
-			);
-		}
-	});
-
-	// Export the module back to the route
-	module.exports = Search;
-
-/***/ },
-/* 264 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	// Include React and React-Router dependencies
-	var React = __webpack_require__(3);
-
-	// Query Component Declaration
-	var Query = React.createClass({
-		displayName: "Query",
-
-
-		// Here we set initial variables for the component to be blanks
-		getInitialState: function getInitialState() {
-			return {
-				search: "",
-				start: "",
-				end: ""
-			};
-		},
-
-		// Whenever we detect ANY change in the textbox, we register it. 
-		handleChange: function handleChange(event) {
-			console.log("TEXT CHANGED");
-
-			// Here we create syntax to capture any change in text to the query terms (pre-search).
-			// See this Stack Overflow answer for more details: 
-			// http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
-			var newState = {};
-			newState[event.target.id] = event.target.value;
-			this.setState(newState);
-		},
-
-		/*This code handles the sending of the search terms to the parent Search component*/
-		handleSubmit: function handleSubmit() {
-			console.log("CLICKED");
-			this.props.updateSearch(this.state.search, this.state.start, this.state.end);
-			return false;
-		},
-
-		// Here we render the Query component
-		render: function render() {
-
-			return React.createElement(
-				"div",
-				{ className: "main-container" },
-				React.createElement(
-					"div",
-					{ className: "row" },
-					React.createElement(
-						"div",
-						{ className: "col-lg-12" },
-						React.createElement(
-							"div",
-							{ className: "panel panel-primary" },
-							React.createElement(
-								"div",
-								{ className: "panel-heading" },
-								React.createElement(
-									"h1",
-									{ className: "panel-title" },
-									React.createElement(
-										"strong",
-										null,
-										React.createElement("i", { className: "fa fa-newspaper-o", "aria-hidden": "true" }),
-										"  Query"
-									)
-								)
-							),
-							React.createElement(
-								"div",
-								{ className: "panel-body" },
-								React.createElement(
-									"form",
-									null,
-									React.createElement(
-										"div",
-										{ className: "form-group" },
-										React.createElement(
-											"h4",
-											{ className: "" },
-											React.createElement(
-												"strong",
-												null,
-												"Topic"
-											)
-										),
-										React.createElement("input", { type: "text", value: this.state.value, className: "form-control ", id: "search", onChange: this.handleChange, required: true }),
-										React.createElement(
-											"h4",
-											{ className: "" },
-											React.createElement(
-												"strong",
-												null,
-												"Start Year"
-											)
-										),
-										React.createElement("input", { type: "number", value: this.state.value, className: "form-control ", id: "start", onChange: this.handleChange, required: true }),
-										React.createElement(
-											"h4",
-											{ className: "" },
-											React.createElement(
-												"strong",
-												null,
-												"End Year"
-											)
-										),
-										React.createElement("input", { type: "number", value: this.state.value, className: "form-control ", id: "end", onChange: this.handleChange, required: true })
-									),
-									React.createElement(
-										"div",
-										{ className: "pull-right" },
-										React.createElement(
-											"button",
-											{ type: "button", className: "btn btn-danger", onClick: this.handleSubmit },
-											React.createElement(
-												"h4",
-												null,
-												"Submit"
-											)
-										)
-									)
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-
-	});
-
-	// Export the module back to the route
-	module.exports = Query;
-
-/***/ },
-/* 265 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	// Include React and React-Router dependencies
-	var React = __webpack_require__(3);
-	var Router = __webpack_require__(1);
-
-	// Include the Helper (for the query)
-	var helpers = __webpack_require__(238);
-
-	// Query Component Declaration
-	var Results = React.createClass({
-		displayName: 'Results',
-
-
-		// Here we will save states for the contents we save 
-		getInitialState: function getInitialState() {
-			return {
-				title: "",
-				url: "",
-				pubdate: ""
-			};
-		},
-
-		// /*This code handles the sending of the search terms to the parent Search component*/
-		handleClick: function handleClick(item, event) {
-			console.log("CLICKED");
-			console.log(item);
-
-			helpers.postSaved(item.headline.main, item.pub_date, item.web_url).then(function (data) {
-				console.log(item.web_url);
-			}.bind(this));
-		},
-
-		// Here we render the function
-		render: function render() {
-			if (
-
-			// We check if the target has a "docs" value (to confirm that we aren't just running the initial data)
-			!this.props.results.hasOwnProperty('docs')) {
-
-				return React.createElement(
-					'li',
-					{ className: 'list-group-item' },
-					React.createElement(
-						'h3',
-						null,
-						React.createElement(
-							'span',
-							null,
-							React.createElement(
-								'em',
-								null,
-								'Enter search terms to begin...'
-							)
-						)
-					)
-				);
-			}
-
-			// If data is provided
-			else {
-				var
-
-				// We loop through the results and create divs for each.
-				articles = this.props.results.docs.map(function (article, index) {
-					return React.createElement(
-						'div',
-						{ key: index },
-						React.createElement(
-							'li',
-							{ className: 'list-group-item' },
-							React.createElement(
-								'h3',
-								null,
-								React.createElement(
-									'span',
-									null,
-									React.createElement(
-										'em',
-										null,
-										article.headline.main
-									)
-								),
-								React.createElement(
-									'span',
-									{ className: 'btn-group pull-right' },
-									React.createElement(
-										'a',
-										{ href: article.web_url, target: '_blank' },
-										React.createElement(
-											'button',
-											{ className: 'btn btn-default ' },
-											'View Article'
-										)
-									),
-									React.createElement(
-										'button',
-										{ className: 'btn btn-primary', onClick: this.handleClick.bind(this, article) },
-										'Save'
-									)
-								)
-							),
-							React.createElement(
-								'p',
-								null,
-								'Date Published: ',
-								article.pub_date
-							)
-						)
-					);
-				}.bind(this));
-			}
-
-			return React.createElement(
-				'div',
-				{ className: 'main-container' },
-				React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'div',
-						{ className: 'col-lg-12' },
-						React.createElement(
-							'div',
-							{ className: 'panel panel-primary' },
-							React.createElement(
-								'div',
-								{ className: 'panel-heading' },
-								React.createElement(
-									'h1',
-									{ className: 'panel-title' },
-									React.createElement(
-										'strong',
-										null,
-										React.createElement('i', { className: 'fa fa-list-alt' }),
-										'  Results'
-									)
-								)
-							),
-							React.createElement(
-								'div',
-								{ className: 'panel-body' },
-								React.createElement(
-									'ul',
-									{ className: 'list-group' },
-									articles
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-
-	});
-
-	// Export the module back to the route
-	module.exports = Results;
-
-/***/ },
-/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30205,7 +29799,7 @@
 	module.exports = Main;
 
 /***/ },
-/* 267 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30310,7 +29904,7 @@
 	module.exports = Admin;
 
 /***/ },
-/* 268 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30319,6 +29913,7 @@
 	var Router = __webpack_require__(1);
 	var User = __webpack_require__(237);
 
+	// USER # 1
 	// This is the first component in User workflow
 	// Component gets user name, and passes it on to the User component props.
 	var UserName = React.createClass({
@@ -30338,10 +29933,10 @@
 
 			this.setState({ submitted: true });
 		},
-		componentWillMount: function componentWillMount() {
+		componentWillUnMount: function componentWillUnMount() {
 			this.setState({ submitted: false, userName: "" });
 
-			console.log("will mount;");
+			console.log("will unmount;");
 		},
 
 
@@ -30370,7 +29965,7 @@
 											'strong',
 											null,
 											React.createElement('i', { className: 'fa fa-newspaper-o', 'aria-hidden': 'true' }),
-											' Survey Name'
+											' User Name'
 										)
 									)
 								),
@@ -30380,7 +29975,7 @@
 									React.createElement(
 										'h1',
 										null,
-										'This is the userName page'
+										'Enter your name'
 									),
 									React.createElement('input', { type: 'text',
 										placeholder: 'Hello!',
@@ -30408,7 +30003,7 @@
 	module.exports = UserName;
 
 /***/ },
-/* 269 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30483,7 +30078,7 @@
 										React.createElement(
 											'button',
 											{ value: 'viewSurvey', onClick: this.buttonClicked, type: 'button', className: 'btn btn-primary center-block', style: buttonStyle },
-											'Search Survey\'s'
+											'Search by Survey\'s'
 										)
 									)
 								),
@@ -30496,7 +30091,7 @@
 										React.createElement(
 											'button',
 											{ value: 'viewUsers', onClick: this.buttonClicked, type: 'button', className: 'btn btn-primary center-block', style: buttonStyle },
-											'Search User\'s'
+											'Search by User\'s'
 										)
 									)
 								)
@@ -30513,7 +30108,7 @@
 	module.exports = AdminSelector;
 
 /***/ },
-/* 270 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30522,7 +30117,7 @@
 	var Router = __webpack_require__(1);
 	var helpers = __webpack_require__(238);
 	var UserSurvey = __webpack_require__(258);
-	var AdminUserSurveyList = __webpack_require__(271);
+	var AdminUserSurveyList = __webpack_require__(268);
 
 	//Second component is User workflow
 	//Component takes the user name from the props and sets it to the state
@@ -30674,7 +30269,7 @@
 	module.exports = AdminUserList;
 
 /***/ },
-/* 271 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30683,7 +30278,7 @@
 	var Router = __webpack_require__(1);
 	var helpers = __webpack_require__(238);
 	var UserSurvey = __webpack_require__(258);
-	var AdminUserSurvey = __webpack_require__(272);
+	var AdminUserSurvey = __webpack_require__(269);
 	//Second component is User workflow
 	//Component takes the user name from the props and sets it to the state
 
@@ -30779,7 +30374,8 @@
 										React.createElement(
 											'em',
 											null,
-											survey.surveyType
+											survey.surveyType,
+											' '
 										)
 									),
 									React.createElement(
@@ -30789,6 +30385,19 @@
 											'button',
 											{ value: index, onClick: this.handleButton, className: 'btn btn-default ' },
 											'View Survey'
+										)
+									)
+								),
+								React.createElement(
+									'h4',
+									null,
+									React.createElement(
+										'span',
+										null,
+										React.createElement(
+											'em',
+											null,
+											survey.date
 										)
 									)
 								)
@@ -30846,7 +30455,7 @@
 	module.exports = AdminUserSurveyList;
 
 /***/ },
-/* 272 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31016,8 +30625,7 @@
 	module.exports = AdminUserSurvey;
 
 /***/ },
-/* 273 */,
-/* 274 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31026,7 +30634,7 @@
 	var Router = __webpack_require__(1);
 	var helpers = __webpack_require__(238);
 	var UserSurvey = __webpack_require__(258);
-	var AdminSurveyResults = __webpack_require__(275);
+	var AdminSurveyResults = __webpack_require__(271);
 
 	//Second component is User workflow
 	//Component takes the user name from the props and sets it to the state
@@ -31117,11 +30725,20 @@
 									),
 									React.createElement(
 										'span',
+										null,
+										React.createElement(
+											'em',
+											null,
+											survey.date
+										)
+									),
+									React.createElement(
+										'span',
 										{ className: 'btn-group pull-right' },
 										React.createElement(
 											'button',
 											{ value: index, onClick: this.handleButton, className: 'btn btn-default ' },
-											'Complete Survey'
+											'Select'
 										)
 									)
 								)
@@ -31178,7 +30795,7 @@
 	module.exports = AdminSurveySearch;
 
 /***/ },
-/* 275 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31187,7 +30804,7 @@
 	var Router = __webpack_require__(1);
 	var helpers = __webpack_require__(238);
 	var UserSurvey = __webpack_require__(258);
-	var AdminUserResults2 = __webpack_require__(276);
+	var AdminUserResults2 = __webpack_require__(272);
 
 	//Second component is User workflow
 	//Component takes the user name from the props and sets it to the state
@@ -31288,7 +30905,7 @@
 										React.createElement(
 											'button',
 											{ value: index, onClick: this.handleButton, className: 'btn btn-default ' },
-											'Veiw User Survey\'s'
+											'Veiw'
 										)
 									)
 								)
@@ -31320,7 +30937,7 @@
 										'strong',
 										null,
 										React.createElement('i', { className: 'fa fa-download', 'aria-hidden': 'true' }),
-										' Survey Users'
+										'Users that completed'
 									)
 								)
 							),
@@ -31345,7 +30962,7 @@
 	module.exports = AdminSurveyResults;
 
 /***/ },
-/* 276 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31354,7 +30971,7 @@
 	var Router = __webpack_require__(1);
 	var helpers = __webpack_require__(238);
 	var UserSurvey = __webpack_require__(258);
-	var AdminUserSurvey = __webpack_require__(272);
+	var AdminUserSurvey = __webpack_require__(269);
 	//Second component is User workflow
 	//Component takes the user name from the props and sets it to the state
 
@@ -31376,7 +30993,7 @@
 				this.setState({
 					savedSurveys: Data.data
 				});
-				console.log("user survey results " + Data.data);
+				console.log("user survey results date " + Data.data.date);
 			}.bind(this));
 		},
 
@@ -31459,7 +31076,20 @@
 										React.createElement(
 											'button',
 											{ value: index, onClick: this.handleButton, className: 'btn btn-default ' },
-											this.state.userName + "surveys"
+											'select'
+										)
+									)
+								),
+								React.createElement(
+									'h4',
+									null,
+									React.createElement(
+										'span',
+										null,
+										React.createElement(
+											'em',
+											null,
+											survey.date
 										)
 									)
 								)
@@ -31515,6 +31145,84 @@
 
 	// Export the module back to the route
 	module.exports = AdminUserResults2;
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(3);
+	var Router = __webpack_require__(1);
+	var Selector = __webpack_require__(236);
+
+	var Link = __webpack_require__(1).Link;
+	var image = "https://static.pexels.com/photos/29724/pexels-photo-29724.jpg";
+
+	var jumboStyle = {
+
+		backgroundImage: 'url(' + image + ')',
+		height: 600
+	};
+	var buttonStyle = {
+		width: 200,
+		height: 100,
+		position: 'relative',
+		top: 20
+	};
+
+	var UserFinnish = React.createClass({
+		displayName: 'UserFinnish',
+
+
+		render: function render() {
+
+			return React.createElement(
+				'div',
+				{ className: 'main-container' },
+				React.createElement(
+					'div',
+					{ className: 'jumbotron', style: jumboStyle },
+					React.createElement(
+						'h2',
+						{ className: 'text-center' },
+						React.createElement(
+							'strong',
+							null,
+							'Congratulations'
+						)
+					),
+					React.createElement(
+						'h3',
+						{ className: 'text-center' },
+						'Survey Completed'
+					),
+					React.createElement(
+						'div',
+						{ className: 'col-xs-12 col-sm-12 col-md-12 col-lg-12 ' },
+						React.createElement(
+							'div',
+							{ className: 'row' },
+							React.createElement(
+								Link,
+								{ to: '/' },
+								'  ',
+								React.createElement(
+									'button',
+									{ value: 'home', type: 'button', className: 'btn btn-primary center-block', style: buttonStyle },
+									'Home'
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+
+	});
+
+	// Export the module back to the route
+	module.exports = UserFinnish;
 
 /***/ }
 /******/ ]);

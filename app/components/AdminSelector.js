@@ -43,12 +43,12 @@ var AdminSelector = React.createClass({
 
 									<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 											<div class="row">
-												<button value='viewSurvey' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>Search Survey's</button>
+												<button value='viewSurvey' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>Search by Survey's</button>
 											</div>
 									</div>
 									<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
 											<div className="row">
-												<button value='viewUsers' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>Search User's</button>
+												<button value='viewUsers' onClick={this.buttonClicked} type="button" className="btn btn-primary center-block" style={buttonStyle}>Search by User's</button>
 											</div>
 									</div>		
 

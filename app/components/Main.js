@@ -32,8 +32,7 @@ var Main = React.createClass({
 					
 							<div className="collapse navbar-collapse navbar-ex1-collapse">
 								<ul className="nav navbar-nav navbar-right">
-									<li><a href="#/search">User</a></li>
-									<li><a href="#/saved">Admin</a></li>
+									
 								</ul>
 							</div>
 						</div>

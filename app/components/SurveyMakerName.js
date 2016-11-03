@@ -42,9 +42,9 @@ var SurveyMakerName = React.createClass({
 								</div>
 								<div className="panel-body">
 
-									<h1>This is the surveyMakerName page</h1>
+									<h1>Enter Survey Name</h1>
 									 <input type="text"
-          								placeholder="Hello!"
+          								placeholder="Survey Name"
          								 value={this.state.surveyName}
          								 onChange={this.handleChange} />
        								 <button onClick={this.handleSubmit}>Submit</button>

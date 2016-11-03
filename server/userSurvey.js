@@ -8,7 +8,8 @@ var UserSurveySchema = new Schema({
   surveyType: {
     type: String,
   },
-  answers: {}
+  answers: {},
+  date: { type : Date, default: Date() },
  
 });
 

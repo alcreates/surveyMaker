@@ -68,7 +68,7 @@ var SurveyMaker = React.createClass({
 								</div>
 								<div className="panel-body">
 
-									<h1>This is the surveyMaker page</h1>
+									
 									 <input type="text"
           								placeholder="Add question!"
          								 value={this.state.question}
@@ -121,7 +121,7 @@ var SurveyMaker = React.createClass({
 								</div>
 								<div className="panel-body">
 
-									<h1>This is the surveyMaker page</h1>
+									<h1>Add a question</h1>
 									 <input type="text"
           								placeholder="Add question!"
          								 value={this.state.question}
@@ -142,7 +142,7 @@ var SurveyMaker = React.createClass({
 
 						<div className="panel panel-primary">
 							<div className="panel-heading">
-								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> Saved Articles</strong></h1>
+								<h1 className="panel-title"><strong><i className="fa fa-download" aria-hidden="true"></i> added questions</strong></h1>
 							</div>
 							<div className="panel-body">
 								<ul className="list-group">

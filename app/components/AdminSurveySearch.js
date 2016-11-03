@@ -81,8 +81,9 @@ var AdminSurveySearch = React.createClass({
 
 							<h3>
 							  	<span><em>{survey.title}</em></span>
+							  	<span><em>{survey.date}</em></span>
 								<span className="btn-group pull-right" >
-									<button value={index} onClick={this.handleButton} className="btn btn-default ">Complete Survey</button>
+									<button value={index} onClick={this.handleButton} className="btn btn-default ">Select</button>
 									
 								</span>
 							</h3>

@@ -90,12 +90,16 @@ var AdminUserSurveyList = React.createClass({
 						  <li className="list-group-item" >
 
 							<h3>
-							  	<span><em>{survey.surveyType}</em></span>
+							  	<span><em>{survey.surveyType} </em></span>
+							  	
 								<span className="btn-group pull-right" >
 									<button value={index} onClick={this.handleButton} className="btn btn-default ">View Survey</button>
 									
 								</span>
 							</h3>
+							<h4>
+								<span><em>{survey.date}</em></span>
+							</h4>
 							
 
 						  </li>

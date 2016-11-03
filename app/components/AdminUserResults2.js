@@ -23,7 +23,7 @@ var AdminUserResults2 = React.createClass({
 				this.setState({
 					savedSurveys: Data.data
 				});
-				console.log("user survey results " + Data.data);
+				console.log("user survey results date " + Data.data.date);
 			}.bind(this))
 	},
 // A button is attached to each survey in order to let the user be able to pick a survey
@@ -91,11 +91,15 @@ var AdminUserResults2 = React.createClass({
 
 							<h3>
 							  	<span><em>{survey.surveyType}</em></span>
+							  	
 								<span className="btn-group pull-right" >
-									<button value={index} onClick={this.handleButton} className="btn btn-default ">{this.state.userName + "surveys"}</button>
+									<button value={index} onClick={this.handleButton} className="btn btn-default ">select</button>
 									
 								</span>
 							</h3>
+							<h4>
+							<span><em>{survey.date}</em></span>
+							</h4>
 							
 
 						  </li>

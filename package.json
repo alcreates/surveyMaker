@@ -1,5 +1,5 @@
 {
-  "name": "nytreact",
+  "name": "EverPlans",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,12 +9,15 @@
     "history": "^1.17.0",
     "hnpm": "^1.1.0",
     "install": "^0.8.2",
+    "jasmine-node": "^1.14.5",
     "mongoose": "^4.4.20",
     "morgan": "^1.7.0",
     "react": "^15.1.0",
+    "react-addons-test-utils": "^15.3.2",
     "react-datetime": "^2.6.2",
     "react-dom": "^15.1.0",
-    "react-router": "^2.8.1"
+    "react-router": "^2.8.1",
+    "request": "^2.76.0"
   },
   "devDependencies": {
     "axios": "^0.12.0",
@@ -22,11 +25,12 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
-    "webpack": "^1.13.1",
-    "history": "^1.13.1"
+    "history": "^1.13.1",
+    "jasmine": "^2.5.2",
+    "webpack": "^1.13.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/jasmine-node spec/support",
     "start": "node server.js"
   },
   "author": "",
